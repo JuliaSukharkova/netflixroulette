@@ -1,14 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NetflixRoulette</title>
-</head>
-<body>
-    <div class="container">
-        <h1>Hello!</h1>
-    </div>
-</body>
+  </head>
+  <body class="page">
+    <header class="header">
+      <div class="header-logo">
+        <div class="logo">
+          <img
+            src="https://i.ibb.co/59Ckp19/netflixroulette-copy.png"
+            alt="logo"
+          />
+        </div>
+        <button class="add-button">+ add movie</button>
+      </div>
+      <h1 class="header-title">FIND YOUR MOVIE</h1>
+      <form class="search-form">
+        <div class="search-form__content">
+          <input
+            class="search-form__input"
+            placeholder="What do you want to watch?"
+          />
+          <button class="search-form__button">Search</button>
+        </div>
+      </form>
+    </header>
+    <main class="main">
+      <nav class="nav-menu">
+        <ul class="nav-menu_list">
+          <li><a class="nav-menu_elem" href="#">all</a></li>
+          <li><a class="nav-menu_elem" href="#">Documentary</a></li>
+          <li><a class="nav-menu_elem" href="#">Comedy</a></li>
+          <li><a class="nav-menu_elem" href="#">Horror</a></li>
+          <li><a class="nav-menu_elem" href="#">crime</a></li>
+        </ul>
+        <div class="nav-menu_dropdown">
+          <p class="nav-menu_title">sort by</p>
+          <select class="nav-menu_name" required>
+            <option value="" disabled selected hidden>release date</option>
+            <option value="rating">rating</option>
+            <option value="popularity">popularity</option>
+            <option value="recommended">recommended</option>
+          </select>
+        </div>
+      </nav>
+      <div class="line"></div>
+      <p class="movie-results"><span>39</span> movies found</p>
+      <section class="movie">
+        <div class="movie-card">
+          <picture>
+            <img src="https://i.ibb.co/nkHWj6p/movie1.png" alt="card" />
+          </picture>
+          <div class="movie-card_info">
+            <p class="movie-card_title">Pulp Fiction</p>
+            <p class="movie-card_year">2004</p>
+          </div>
+          <p class="movie-card_genre">Action & Adventure</p>
+       </div>
+        <div class="movie-card">
+          <img src="https://i.ibb.co/606RbKv/movie2.png" alt="card" />
+          <div class="movie-card_info">
+            <p class="movie-card_title">Bohemian Rhapsody</p>
+            <p class="movie-card_year">2003</p>
+          </div>
+          <p class="movie-card_genre">Drama, Biography, Music</p>
+        </div>
+        <div class="movie-card">
+          <img src="https://i.ibb.co/MRxxL9Z/movie3.png" alt="card" />
+          <div class="movie-card_info">
+            <p class="movie-card_title">Kill Bill: Vol 2</p>
+            <p class="movie-card_year">1994</p>
+          </div>
+          <p class="movie-card_genre">Oscar winning Movie</p>
+        </div>
+        <div class="movie-card">
+          <img srcset="https://i.ibb.co/n7r2t1n/movie4.png" alt="card" />
+          <div class="movie-card_info">
+            <p class="movie-card_title">Avengers: War of Infinity</p>
+            <p class="movie-card_year">2004</p>
+          </div>
+          <p class="movie-card_genre">Action & Adventure</p>
+        </div>
+        <div class="movie-card">
+          <img src="https://i.ibb.co/BgBcDS5/movie5.png" alt="card" />
+          <div class="movie-card_info">
+            <p class="movie-card_title">Inception</p>
+            <p class="movie-card_year">2003</p>
+          </div>
+          <p class="movie-card_genre">Action & Adventure</p>
+        </div>
+        <div class="movie-card">
+          <img src="https://i.ibb.co/m4f8ZcC/movie6.png" alt="card" />
+          <div class="movie-card_info">
+            <p class="movie-card_title">Reservoir dogs</p>
+            <p class="movie-card_year">1994</p>
+          </div>
+          <p class="movie-card_genre">Oscar winning Movie</p>
+        </div> 
+        <div class="movie-card">
+          <img src="https://kinopoiskapiunofficial.tech/images/posters/kp_small/535341.jpg" alt="card" />
+          <div class="movie-card_info">
+            <p class="movie-card_title">1+1</p>
+            <p class="movie-card_year">2011</p>
+          </div>
+          <p class="movie-card_genre">Drama</p>
+        </div>
+        <div class="movie-card">
+          <img src="https://kinopoiskapiunofficial.tech/images/posters/kp_small/251733.jpg" alt="card" />
+          <div class="movie-card_info">
+            <p class="movie-card_title">Avatar</p>
+            <p class="movie-card_year">2009</p>
+          </div>
+          <p class="movie-card_genre">Action & Adventure</p>
+        </div> 
+      </section>
+    </main>
+    <footer>
+        <img class="footer-logo"
+          src="https://i.ibb.co/59Ckp19/netflixroulette-copy.png"
+          alt="logo"
+        />
+    </footer>
+  </body>
 </html>
