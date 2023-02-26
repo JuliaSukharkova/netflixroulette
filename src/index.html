@@ -8,7 +8,7 @@
   </head>
   <body class="page">
     <header class="header">
-      <div class="header-logo">
+      <div class="header__logo">
         <div>
           <img
             src="https://i.ibb.co/59Ckp19/netflixroulette-copy.png"
@@ -17,7 +17,7 @@
         </div>
         <button>+ add movie</button>
       </div>
-      <h1 class="header-title">FIND YOUR MOVIE</h1>
+      <h1 class="header__title">FIND YOUR MOVIE</h1>
       <form class="search-form">
         <div class="search-form__content">
           <input placeholder="What do you want to watch?" />
@@ -27,21 +27,23 @@
     </header>
     <main class="main">
       <nav class="nav-menu">
-        <ul class="nav-menu_list">
+        <ul class="nav-menu__list">
           <li><a href="#">all</a></li>
           <li><a href="#">Documentary</a></li>
           <li><a href="#">Comedy</a></li>
           <li><a href="#">Horror</a></li>
           <li><a href="#">crime</a></li>
         </ul>
-        <div class="nav-menu_dropdown">
+        <div class="nav-menu__dropdown">
           <p>sort by</p>
-          <select class="nav-menu_name" required>
-            <option value="" disabled selected hidden>release date</option>
-            <option value="rating">rating</option>
-            <option value="popularity">popularity</option>
-            <option value="recommended">recommended</option>
-          </select>
+          <div class="nav-menu__section">
+            <a class="dropdown" onclick="return false" href="#">release date</a>
+            <ul class="nav-menu__item">
+              <li><a onclick="return false" href="#">rating</a></li>
+              <li><a onclick="return false" href="#">popularity</a></li>
+              <li><a onclick="return false" href="#">recommended</a></li>
+            </ul>
+          </div>
         </div>
       </nav>
       <div class="line"></div>
@@ -49,73 +51,73 @@
       <section class="movie">
         <div class="movie-card">
           <img src="https://i.ibb.co/nkHWj6p/movie1.png" alt="card" />
-          <div class="movie-card_info">
-            <p class="movie-card_title">Pulp Fiction</p>
-            <p class="movie-card_year">2004</p>
+          <div class="movie-card__info">
+            <p class="movie-card__title">Pulp Fiction</p>
+            <p class="movie-card__year">2004</p>
           </div>
-          <p class="movie-card_genre">Action & Adventure</p>
+          <p class="movie-card__genre">Action & Adventure</p>
         </div>
         <div class="movie-card">
           <img src="https://i.ibb.co/606RbKv/movie2.png" alt="card" />
-          <div class="movie-card_info">
-            <p class="movie-card_title">Bohemian Rhapsody</p>
-            <p class="movie-card_year">2003</p>
+          <div class="movie-card__info">
+            <div class="movie-card__title">Bohemian Rhapsody</div>
+            <p class="movie-card__year">2003</p>
           </div>
-          <p class="movie-card_genre">Drama, Biography, Music</p>
+          <p class="movie-card__genre">Drama, Biography, Music</p>
         </div>
         <div class="movie-card">
           <img src="https://i.ibb.co/MRxxL9Z/movie3.png" alt="card" />
-          <div class="movie-card_info">
-            <p class="movie-card_title">Kill Bill: Vol 2</p>
-            <p class="movie-card_year">1994</p>
+          <div class="movie-card__info">
+            <p class="movie-card__title">Kill Bill: Vol 2</p>
+            <p class="movie-card__year">1994</p>
           </div>
-          <p class="movie-card_genre">Oscar winning Movie</p>
+          <p class="movie-card__genre">Oscar winning Movie</p>
         </div>
         <div class="movie-card">
           <img srcset="https://i.ibb.co/n7r2t1n/movie4.png" alt="card" />
-          <div class="movie-card_info">
-            <p class="movie-card_title">Avengers: War of Infinity</p>
-            <p class="movie-card_year">2004</p>
+          <div class="movie-card__info">
+            <p class="movie-card__title">Avengers: War of Infinity</p>
+            <p class="movie-card__year">2004</p>
           </div>
-          <p class="movie-card_genre">Action & Adventure</p>
+          <p class="movie-card__genre">Action & Adventure</p>
         </div>
         <div class="movie-card">
           <img src="https://i.ibb.co/BgBcDS5/movie5.png" alt="card" />
-          <div class="movie-card_info">
-            <p class="movie-card_title">Inception</p>
-            <p class="movie-card_year">2003</p>
+          <div class="movie-card__info">
+            <p class="movie-card__title">Inception</p>
+            <p class="movie-card__year">2003</p>
           </div>
-          <p class="movie-card_genre">Action & Adventure</p>
+          <p class="movie-card__genre">Action & Adventure</p>
         </div>
         <div class="movie-card">
           <img src="https://i.ibb.co/m4f8ZcC/movie6.png" alt="card" />
-          <div class="movie-card_info">
-            <p class="movie-card_title">Reservoir dogs</p>
-            <p class="movie-card_year">1994</p>
+          <div class="movie-card__info">
+            <p class="movie-card__title">Reservoir dogs</p>
+            <p class="movie-card__year">1994</p>
           </div>
-          <p class="movie-card_genre">Oscar winning Movie</p>
+          <p class="movie-card__genre">Oscar winning Movie</p>
         </div>
         <div class="movie-card">
           <img
             src="https://kinopoiskapiunofficial.tech/images/posters/kp_small/535341.jpg"
             alt="card"
           />
-          <div class="movie-card_info">
-            <p class="movie-card_title">1+1</p>
-            <p class="movie-card_year">2011</p>
+          <div class="movie-card__info">
+            <p class="movie-card__title">1+1</p>
+            <p class="movie-card__year">2011</p>
           </div>
-          <p class="movie-card_genre">Drama</p>
+          <p class="movie-card__genre">Drama</p>
         </div>
         <div class="movie-card">
           <img
             src="https://kinopoiskapiunofficial.tech/images/posters/kp_small/251733.jpg"
             alt="card"
           />
-          <div class="movie-card_info">
-            <p class="movie-card_title">Avatar</p>
-            <p class="movie-card_year">2009</p>
+          <div class="movie-card__info">
+            <p class="movie-card__title">Avatar</p>
+            <p class="movie-card__year">2009</p>
           </div>
-          <p class="movie-card_genre">Action & Adventure</p>
+          <p class="movie-card__genre">Action & Adventure</p>
         </div>
       </section>
     </main>

@@ -1,87 +1,125 @@
-$primaryColor: white;
-$secondaryColor: #f38281;
-$movieCardWidth: 323px;
-$bgColor: #232323;
-$textUpper: uppercase;
+@import "variables";
+@import "mixin";
 
-@mixin links($link, $hover) {
-  color: $link;
-  &:hover {
-    color: $hover;
-  }
-}
 .main {
   background-color: $bgColor;
   padding: 20px 57px;
 }
+
 .nav-menu {
   display: flex;
   flex-direction: row;
-  margin-bottom: 15px;
+  margin-bottom: 16px;
   font-size: 16px;
   text-transform: $textUpper;
-}
-.nav-menu_list {
-  display: flex;
-  flex-direction: row;
-  gap: 30px;
-  list-style-type: none;
-  cursor: pointer;
-  padding: 0;
-  a {
-    @include links($primaryColor,$secondaryColor);
-    text-decoration: none;
+
+  &__list {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    list-style-type: none;
+    cursor: pointer;
+    padding: 0;
+
+    a {
+      @include links($primaryColor, $tertiaryColor);
+      position: relative;
+      text-decoration: none;
+
+      &:nth-child(n):hover:before {
+        content: "";
+        height: 4px;
+        background: $tertiaryColor;
+        position: absolute;
+        display: block;
+        width: 40px;
+        top: 50px;
+        z-index: 1;
+      }
+    }
+  }
+
+  &__dropdown {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    gap: 30px;
+    color: white;
+    text-transform: uppercase;
+
+    p {
+      opacity: 0.6;
+    }
+
+    ul {
+      list-style-type: none;
+    }
+  }
+
+  &__section {
+    list-style: none;
+    text-align: center;
+    position: relative;
+
+    &:hover ul {
+      opacity: 1;
+      top: 20px;
+      right: -2px;
+      visibility: visible;
+    }
+
+    a {
+      color: white;
+      display: block;
+      font-size: 16px;
+      text-decoration: none;
+    }
+  }
+
+  .dropdown:after {
+    content: " \25bc";
+    font-size: 12px;
+    padding-left: 6px;
+    color: #f65261;
+  }
+
+  &__item {
+    position: absolute;
+    visibility: hidden;
+    right: -2px;
+    z-index: 1;
+    -webkit-transition: all 0.25s ease;
+    -moz-transition: all 0.25s ease;
+    -ms-transition: all 0.25s ease;
+    -o-transition: all 0.25s ease;
+    transition: all 0.25s ease;
+
+    a {
+      background: #f65261;
+      padding: 10px 10px;
+
+      &:hover {
+        background: #888888;
+      }
+    }
   }
 }
-.nav-menu_dropdown {
-  display: flex;
-  flex-direction: row;
-  margin-left: auto;
-  gap: 30px;
-  p {
-    opacity: 0.6;
-  }
-}
-.nav-menu_name {
-  color: $primaryColor;
-}
-select,
-option {
-  text-transform: $textUpper;
-  background: rgba(0, 0, 0, 0);
-  color: black;
-  cursor: pointer;
-}
-select:not([multiple]) {
-  border: none;
-  appearance: none;
-  padding-right: 15px;
-  background-repeat: no-repeat;
-  background-position: calc(100% - 0.25em) 1.35em;
-  background-size: 0.85em auto;
-  background-image: url(https://i.ibb.co/SwfbHxZ/Fill-1.png);
-}
+
 .line {
   border-top: 4px solid #424242;
   width: 100%;
   position: relative;
-  &::before {
-    content: "";
-    height: 4px;
-    background: #f38281;
-    position: absolute;
-    display: block;
-    width: 40px;
-    top: -4px;
-  }
 }
+
 .movie-results {
   font-size: 20px;
   line-height: 24px;
+
   span {
     font-weight: 700;
   }
 }
+
 .movie {
   display: grid;
   grid-auto-columns: 1fr 1fr 1fr 1fr;
@@ -90,6 +128,7 @@ select:not([multiple]) {
   margin: 28px 0;
   gap: 30px;
 }
+
 .movie-card {
   display: flex;
   flex-direction: column;
@@ -97,34 +136,47 @@ select:not([multiple]) {
   line-height: 17px;
   width: $movieCardWidth;
   cursor: pointer;
+
   img {
     height: 486px;
   }
+
+  &__info {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__title {
+    font-size: 18px;
+    line-height: 22px;
+    opacity: 0.7;
+  }
+
+  &__year {
+    margin-left: auto;
+    box-sizing: border-box;
+    opacity: 0.5;
+    border: 1px solid #979797;
+    border-radius: 4px;
+    text-align: center;
+    padding: 4px 8px;
+  }
+
+  &__genre {
+    opacity: 0.5;
+    margin-top: -6px;
+  }
 }
-.movie-card_info {
-  display: flex;
-  flex-direction: row;
-}
-.movie-card_title {
-  font-size: 18px;
-  line-height: 22px;
-  opacity: 0.7;
-}
-.movie-card_year {
-  margin-left: auto;
-  box-sizing: border-box;
-  opacity: 0.5;
-  border: 1px solid #979797;
-  border-radius: 4px;
-  text-align: center;
-  padding: 4px 8px;
-}
-.movie-card_genre {
-  opacity: 0.5;
-  margin-top: -5px;
-}
+
 footer {
-  padding: 25px 0;
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  height: 30px;
+  width: 100%;
+  padding: 10px 0;
+  background: #424242;
+
   img {
     display: block;
     margin: 0 auto;
