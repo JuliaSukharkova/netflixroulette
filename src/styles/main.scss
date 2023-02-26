@@ -4,14 +4,23 @@
 .main {
   background-color: $bgColor;
   padding: 20px 57px;
+
+  @media (min-width: $screen-md) {
+    padding: 14px 32px;
+  }
 }
 
 .nav-menu {
   display: flex;
   flex-direction: row;
   margin-bottom: 16px;
-  font-size: 16px;
+  font-size: $fontSizeS;
   text-transform: $textUpper;
+
+  @media (min-width: $screen-md) {
+    margin-bottom: 8px;
+    font-size: $fontSizeXs;
+  }
 
   &__list {
     display: flex;
@@ -20,6 +29,10 @@
     list-style-type: none;
     cursor: pointer;
     padding: 0;
+
+    @media (min-width: $screen-md) {
+      gap: 14px;
+    }
 
     a {
       @include links($primaryColor, $tertiaryColor);
@@ -35,6 +48,12 @@
         width: 40px;
         top: 50px;
         z-index: 1;
+
+        @media (min-width: $screen-md) {
+          height: 2px;
+          width: 30px;
+          top: 39px;
+        }
       }
     }
   }
@@ -44,8 +63,12 @@
     align-items: center;
     margin-left: auto;
     gap: 30px;
-    color: white;
+    color: $primaryColor;
     text-transform: uppercase;
+
+    @media (min-width: $screen-md) {
+      gap: 18px;
+    }
 
     p {
       opacity: 0.6;
@@ -60,19 +83,28 @@
     list-style: none;
     text-align: center;
     position: relative;
+    padding: 5px 0;
 
     &:hover ul {
       opacity: 1;
-      top: 20px;
+      top: -30px;
       right: -2px;
       visibility: visible;
+
+      @media (min-width: $screen-md) {
+        top: 10px;
+      }
     }
 
     a {
-      color: white;
+      color: $primaryColor;
       display: block;
-      font-size: 16px;
+      font-size: $fontSizeS;
       text-decoration: none;
+
+      @media (min-width: $screen-md) {
+        font-size: $fontSizeXs;
+      }
     }
   }
 
@@ -80,12 +112,15 @@
     content: " \25bc";
     font-size: 12px;
     padding-left: 6px;
-    color: #f65261;
+    color: $bgColorLink;
   }
 
   &__item {
     position: absolute;
     visibility: hidden;
+    width: 134px;
+    top: 10px;
+    height: auto;
     right: -2px;
     z-index: 1;
     -webkit-transition: all 0.25s ease;
@@ -95,28 +130,41 @@
     transition: all 0.25s ease;
 
     a {
-      background: #f65261;
+      background: $bgColorLink;
       padding: 10px 10px;
 
       &:hover {
-        background: #888888;
+        background: $bgColorLinkHov;
       }
     }
   }
 }
 
 .line {
-  border-top: 4px solid #424242;
+  border-top: 4px solid $borderTopLine;
   width: 100%;
   position: relative;
+
+  @media (min-width: $screen-md) {
+    border-top: 2px solid $borderTopLine;
+  }
 }
 
 .movie-results {
-  font-size: 20px;
+  font-size: $fontSizeL;
   line-height: 24px;
+
+  @media (min-width: $screen-md) {
+    font-size: $fontSizeM;
+    line-height: 20px;
+  }
 
   span {
     font-weight: 700;
+
+    @media (min-width: $screen-md) {
+      font-weight: 600;
+    }
   }
 }
 
@@ -127,6 +175,13 @@
   grid-template-rows: 1fr 1fr;
   margin: 28px 0;
   gap: 30px;
+
+  @media (min-width: $screen-md) {
+    grid-auto-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    gap: 40px;
+  }
 }
 
 .movie-card {
@@ -137,17 +192,27 @@
   width: $movieCardWidth;
   cursor: pointer;
 
+  @media (min-width: $screen-md) {
+    line-height: 14px;
+    width: $movieCardWidthMd;
+  }
+
   img {
     height: 486px;
+
+    @media (min-width: $screen-md) {
+      height: 416px;
+    }
   }
 
   &__info {
     display: flex;
     flex-direction: row;
+    align-items: center;
   }
 
   &__title {
-    font-size: 18px;
+    font-size: $fontSizeM;
     line-height: 22px;
     opacity: 0.7;
   }
@@ -175,7 +240,11 @@ footer {
   height: 30px;
   width: 100%;
   padding: 10px 0;
-  background: #424242;
+  background: $borderTopLine;
+
+  @media (min-width: $screen-md) {
+    padding: 5px 0;
+  }
 
   img {
     display: block;
