@@ -5,8 +5,8 @@
     background-color: #424242;
 }
 
-@mixin links($link, $hover) {
-    color: $link;
+@mixin label($label, $hover) {
+    color: $label;
 
     &:hover {
         color: $hover;

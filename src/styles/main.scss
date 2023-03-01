@@ -2,10 +2,10 @@
 @import "mixin";
 
 .main {
-  background-color: $bgColor;
   padding: 20px 57px;
+  background-color: $bgColor;
 
-  @media (min-width: $screen-md) {
+  @media (max-width: $screen-md) {
     padding: 14px 32px;
   }
 }
@@ -17,7 +17,7 @@
   font-size: $fontSizeS;
   text-transform: $textUpper;
 
-  @media (min-width: $screen-md) {
+  @media (max-width: $screen-md) {
     margin-bottom: 8px;
     font-size: $fontSizeXs;
   }
@@ -26,35 +26,12 @@
     display: flex;
     flex-direction: row;
     gap: 30px;
+    padding: 0;
     list-style-type: none;
     cursor: pointer;
-    padding: 0;
 
-    @media (min-width: $screen-md) {
+    @media (max-width: $screen-md) {
       gap: 14px;
-    }
-
-    a {
-      @include links($primaryColor, $tertiaryColor);
-      position: relative;
-      text-decoration: none;
-
-      &:nth-child(n):hover:before {
-        content: "";
-        height: 4px;
-        background: $tertiaryColor;
-        position: absolute;
-        display: block;
-        width: 40px;
-        top: 50px;
-        z-index: 1;
-
-        @media (min-width: $screen-md) {
-          height: 2px;
-          width: 30px;
-          top: 39px;
-        }
-      }
     }
   }
 
@@ -66,7 +43,7 @@
     color: $primaryColor;
     text-transform: uppercase;
 
-    @media (min-width: $screen-md) {
+    @media (max-width: $screen-md) {
       gap: 18px;
     }
 
@@ -80,29 +57,29 @@
   }
 
   &__section {
-    list-style: none;
-    text-align: center;
     position: relative;
     padding: 5px 0;
+    list-style: none;
+    text-align: center;
 
     &:hover ul {
-      opacity: 1;
-      top: -30px;
-      right: -2px;
+      top: 15px;
+      right: 10px;
       visibility: visible;
+      opacity: 1;
 
-      @media (min-width: $screen-md) {
+      @media (max-width: $screen-md) {
         top: 10px;
       }
     }
 
     a {
-      color: $primaryColor;
       display: block;
+      color: $primaryColor;
       font-size: $fontSizeS;
       text-decoration: none;
 
-      @media (min-width: $screen-md) {
+      @media (max-width: $screen-md) {
         font-size: $fontSizeXs;
       }
     }
@@ -110,19 +87,18 @@
 
   .dropdown:after {
     content: " \25bc";
-    font-size: 12px;
     padding-left: 6px;
+    font-size: 12px;
     color: $bgColorLink;
   }
 
   &__item {
     position: absolute;
+    z-index: 1;
+    right: 10px;
     visibility: hidden;
     width: 134px;
-    top: 10px;
     height: auto;
-    right: -2px;
-    z-index: 1;
     -webkit-transition: all 0.25s ease;
     -moz-transition: all 0.25s ease;
     -ms-transition: all 0.25s ease;
@@ -130,8 +106,9 @@
     transition: all 0.25s ease;
 
     a {
-      background: $bgColorLink;
       padding: 10px 10px;
+      width: 132px;
+      background: $bgColorLink;
 
       &:hover {
         background: $bgColorLinkHov;
@@ -141,11 +118,11 @@
 }
 
 .line {
-  border-top: 4px solid $borderTopLine;
-  width: 100%;
   position: relative;
+  width: 100%;
+  border-top: 4px solid $borderTopLine;
 
-  @media (min-width: $screen-md) {
+  @media (max-width: $screen-md) {
     border-top: 2px solid $borderTopLine;
   }
 }
@@ -154,7 +131,7 @@
   font-size: $fontSizeL;
   line-height: 24px;
 
-  @media (min-width: $screen-md) {
+  @media (max-width: $screen-md) {
     font-size: $fontSizeM;
     line-height: 20px;
   }
@@ -162,7 +139,7 @@
   span {
     font-weight: 700;
 
-    @media (min-width: $screen-md) {
+    @media (max-width: $screen-md) {
       font-weight: 600;
     }
   }
@@ -176,7 +153,7 @@
   margin: 28px 0;
   gap: 30px;
 
-  @media (min-width: $screen-md) {
+  @media (max-width: $screen-md) {
     grid-auto-columns: 1fr 1fr;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
@@ -192,7 +169,7 @@
   width: $movieCardWidth;
   cursor: pointer;
 
-  @media (min-width: $screen-md) {
+  @media (max-width: $screen-md) {
     line-height: 14px;
     width: $movieCardWidthMd;
   }
@@ -200,7 +177,7 @@
   img {
     height: 486px;
 
-    @media (min-width: $screen-md) {
+    @media (max-width: $screen-md) {
       height: 416px;
     }
   }
@@ -219,17 +196,17 @@
 
   &__year {
     margin-left: auto;
+    padding: 4px 8px;
+    border-radius: 4px;
     box-sizing: border-box;
     opacity: 0.5;
     border: 1px solid #979797;
-    border-radius: 4px;
     text-align: center;
-    padding: 4px 8px;
   }
 
   &__genre {
-    opacity: 0.5;
     margin-top: -6px;
+    opacity: 0.5;
   }
 }
 
@@ -242,12 +219,91 @@ footer {
   padding: 10px 0;
   background: $borderTopLine;
 
-  @media (min-width: $screen-md) {
+  @media (max-width: $screen-md) {
     padding: 5px 0;
   }
 
   img {
     display: block;
     margin: 0 auto;
+  }
+}
+
+.switcher {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  input {
+    appearance: none;
+    outline: none;
+    position: relative;
+  }
+
+  label {
+    @include label($primaryColor, $tertiaryColor);
+  }
+
+  label:last-child {
+    padding: 0;
+  }
+
+  &__control {
+    padding-right: 30px;
+  }
+
+  &__checkbox:checked+&__control::after {
+    position: absolute;
+    display: block;
+    z-index: 1;
+    top: 66px;
+    width: 40px;
+    height: 4px;
+    content: "";
+    background: $tertiaryColor;
+    transition: all 0.5s;
+
+    @media (max-width: $screen-md) {
+      top: 52px;
+      width: 32px;
+      height: 2px;
+    }
+  }
+
+  &__checkbox:checked+&__control.large::after {
+    position: absolute;
+    display: block;
+    z-index: 1;
+    top: 66px;
+    width: 134px;
+    height: 4px;
+    content: "";
+    background: $tertiaryColor;
+    transition: all 0.5s;
+
+    @media (max-width: $screen-md) {
+      top: 52px;
+      width: 120px;
+      height: 2px;
+    }
+  }
+
+  &__checkbox:checked+&__control.medium::after {
+    position: absolute;
+    display: block;
+    z-index: 1;
+    top: 66px;
+    width: 78px;
+    height: 4px;
+    content: "";
+    background: $tertiaryColor;
+    transition: all 0.5s;
+
+    @media (max-width: $screen-md) {
+      top: 52px;
+      width: 70px;
+      height: 2px;
+    }
   }
 }

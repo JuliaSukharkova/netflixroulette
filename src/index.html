@@ -27,13 +27,65 @@
     </header>
     <main class="main">
       <nav class="nav-menu">
-        <ul class="nav-menu__list">
-          <li><a href="#">all</a></li>
-          <li><a href="#">Documentary</a></li>
-          <li><a href="#">Comedy</a></li>
-          <li><a href="#">Horror</a></li>
-          <li><a href="#">crime</a></li>
-        </ul>
+        <div class="nav-menu__list">
+          <div class="switcher">
+            <input
+              class="switcher__checkbox"
+              type="radio"
+              id="genreChoice1"
+              name="movie"
+              value="film"
+              checked
+            />
+            <label class="switcher__control" for="genreChoice1">all</label>
+
+            <input
+              class="switcher__checkbox"
+              type="radio"
+              id="genreChoice2"
+              name="movie"
+              value="film"
+            />
+            <label class="switcher__control large" for="genreChoice2"
+              >documentary</label
+            >
+
+            <input
+              class="switcher__checkbox"
+              type="radio"
+              id="genreChoice3"
+              name="movie"
+              value="film"
+            />
+            <label
+              class="switcher__control medium"
+              for="genreChoice3"
+              >horror</label
+            >
+
+            <input
+              class="switcher__checkbox"
+              type="radio"
+              id="genreChoice4"
+              name="movie"
+              value="film"
+            />
+            <label class="switcher__control medium" for="genreChoice4"
+              >comedy</label
+            >
+
+            <input
+              class="switcher__checkbox"
+              type="radio"
+              id="genreChoice5"
+              name="movie"
+              value="film"
+            />
+            <label class="switcher__control medium" for="genreChoice5"
+              >crime</label
+            >
+          </div>
+        </div>
         <div class="nav-menu__dropdown">
           <p>sort by</p>
           <div class="nav-menu__section">
