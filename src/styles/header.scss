@@ -1,5 +1,4 @@
 @import "~normalize.css";
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;1,300;1,400;1,500&display=swap");
 @import "variables";
 @import "mixin";
 
@@ -20,7 +19,7 @@ body {
   background: url("https://i.ibb.co/6XjvCPv/Bitmap.png");
   background-repeat: no-repeat;
   background-size: cover;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: $bgColorOpacity;
 
   @media (max-width: $screen-md) {
     margin-bottom: 8px;
@@ -49,10 +48,11 @@ body {
       font-size: $fontSizeL;
       line-height: 24px;
       color: $secondaryColor;
-      background: rgba(96, 96, 96, 0.68);
+      background: $bgColorBtn;
       border-radius: 4px;
       cursor: pointer;
       padding: 12px 18px;
+      border-width: 0;
 
       @media (max-width: $screen-md) {
         margin-right: 20px;
@@ -89,9 +89,8 @@ body {
       }
 
       input {
-        background: rgba(50, 50, 50, 0.8);
+        background: $bgColorInput;
         mix-blend-mode: normal;
-        outline: none;
         padding: 19px 16px;
         opacity: 0.7;
         font-weight: 400;
@@ -99,6 +98,7 @@ body {
         border-radius: 4px;
         outline: none;
         color: $primaryColor;
+        border-width: 0;
 
         @media (max-width: $screen-md) {
           padding: 16px 12px;
@@ -115,6 +115,7 @@ body {
         padding: 16px 74px;
         border-radius: 4px;
         cursor: pointer;
+        border-width: 0;
 
         @media (max-width: $screen-md) {
           padding: 12px 48px;
