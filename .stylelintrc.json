@@ -2,6 +2,7 @@
   "extends": "stylelint-config-standard-scss",
   "rules": {
     "color-named": "always-where-possible",
+    "selector-class-pattern": null,
     "color-function-notation":"legacy",
     "alpha-value-notation": "number",
     "scss/dollar-variable-colon-newline-after": "always-multi-line",
