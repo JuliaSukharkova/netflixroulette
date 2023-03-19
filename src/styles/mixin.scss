@@ -1,0 +1,14 @@
+@mixin font {
+    font-family: Montserrat, sans-serif;
+    font-size: 14px;
+    color: white;
+    background-color: #424242;
+}
+
+@mixin label($label, $hover) {
+    color: $label;
+
+    &:hover {
+        color: $hover;
+    }
+}

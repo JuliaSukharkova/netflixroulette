@@ -1,18 +1,8 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import "./styles/header.scss";
-import "./styles/main.scss";
+import App from "./App";
+import { createRoot } from 'react-dom/client';
 
-const App = () => (
-  <h1>
-    My React and TypeScript App!!{" "}
-    {new Date().toLocaleDateString()}
-  </h1>
-);
+const container = document.getElementById('root') as HTMLElement;
+const root = createRoot(container);
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+root.render(<App />);
