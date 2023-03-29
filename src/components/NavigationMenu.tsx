@@ -1,69 +1,36 @@
 import React from "react";
-import { Dropdown } from "./Dropdown";
+import { IGenre } from "../types/genres";
 
-export const NavigationMenu = () => {
+export const NavigationMenu = ({
+  items,
+  genreValue, 
+  setGenreValue,
+}: IGenre) => {
   return (
-    <nav className="nav-menu">
-      <div className="nav-menu__list">
-        <div className="switcher">
-          <input
-            className="switcher__checkbox"
-            type="radio"
-            id="genreChoice1"
-            name="movie"
-            value="film"
-            checked
-          />
-          <label className="switcher__control" htmlFor="genreChoice1">
-            all
-          </label>
-
-          <input
-            className="switcher__checkbox"
-            type="radio"
-            id="genreChoice2"
-            name="movie"
-            value="film"
-          />
-          <label className="switcher__control large" htmlFor="genreChoice2">
-            documentary
-          </label>
-
-          <input
-            className="switcher__checkbox"
-            type="radio"
-            id="genreChoice3"
-            name="movie"
-            value="film"
-          />
-          <label className="switcher__control medium" htmlFor="genreChoice3">
-            horror
-          </label>
-
-          <input
-            className="switcher__checkbox"
-            type="radio"
-            id="genreChoice4"
-            name="movie"
-            value="film"
-          />
-          <label className="switcher__control medium" htmlFor="genreChoice4">
-            comedy
-          </label>
-
-          <input
-            className="switcher__checkbox"
-            type="radio"
-            id="genreChoice5"
-            name="movie"
-            value="film"
-          />
-          <label className="switcher__control medium" htmlFor="genreChoice5">
-            crime
-          </label>
-        </div>
-      </div>
-      <Dropdown />
-    </nav>
+    <div className="nav-menu__list">
+      <ul className="switcher">
+        {items.map(
+          ({id, name, value}:{id:number, name: string, value: string}) => (
+            <li
+              key={id}
+              id={value}
+              className={`${
+                value === genreValue ? "switcher__checkbox_active" : "switcher__checkbox"
+              }`}
+            >
+              <a
+                href="#"
+                className="switcher__control"
+                onClick={(e) => {
+                  setGenreValue(value);
+                  e.preventDefault();
+                }}
+              >{name}
+              </a>
+            </li>
+          )
+        )}
+      </ul>
+    </div>
   );
 };

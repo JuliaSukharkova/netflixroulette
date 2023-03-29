@@ -1,0 +1,238 @@
+@import "variables";
+
+.movie-page {
+  display: flex;
+  flex-direction: column;
+  height: 552px;
+  padding: 35px 60px;
+  background: $bgColor;
+  gap: 30px;
+  @media (max-width: $screen-md) {
+    height: 510px;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    a {
+      text-decoration: none;
+    }
+  }
+
+  &__logo {
+    font-weight: 300;
+    font-size: $fontSizeL;
+    line-height: 24px;
+    color: $secondaryColor;
+  }
+}
+.container {
+  display: flex;
+  margin-left: auto;
+
+  .search {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    transition: all 1s;
+    position: relative;
+    z-index: 4;
+    &:hover {
+      cursor: pointer;
+    }
+
+    &::before {
+      content: "";
+      width: 14px;
+      height: 2px;
+      top: 22px;
+      right: 24px;
+      position: absolute;
+      background: $secondaryColor;
+      transform: rotate(139deg);
+      transition: all 0.5s;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 21px;
+      height: 21px;
+      border-radius: 50%;
+      border: 2px solid $secondaryColor;
+      transition: all 0.5s;
+    }
+  }
+
+  input {
+    position: absolute;
+    right: 4px;
+    width: 219px;
+    height: 30px;
+    outline: none;
+    border: none;
+    transition: all 1s;
+    opacity: 0;
+    z-index: 5;
+    letter-spacing: 0.1em;
+    border-radius: 4px;
+    &:hover {
+      cursor: pointer;
+    }
+    &:focus {
+      width: 300px;
+      background-color: $bgColorInput;
+      color: #ffffff90;
+      opacity: 1;
+      cursor: text;
+    }
+    &:focus ~ .search {
+      right: -250px;
+      background: $bgColorInput;
+      z-index: 6;
+      &::before {
+        top: 0;
+        left: 0;
+        width: 25px;
+      }
+      &::after {
+        top: 0;
+        left: 0;
+        width: 25px;
+        height: 2px;
+        border: none;
+        background: $primaryColor;
+        border-radius: 0%;
+        transform: rotate(-45deg);
+      }
+    }
+    &::placeholder {
+      color: $primaryColor;
+      opacity: 0.5;
+    }
+  }
+}
+
+.movie-id {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 58px;
+  @media (max-width: $screen-md) {
+    gap: 38px;
+  }
+
+  img {
+    width: 324px;
+    height: 486px;
+
+    @media (max-width: $screen-md) {
+      width: 246px;
+      height: auto;
+    }
+  }
+
+  p {
+    margin: 0;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    margin-bottom: 8px;
+    @media (max-width: $screen-md) {
+      gap: 20px;
+      line-height: 27px;
+    }
+
+    h1 {
+      margin: 0;
+      font-weight: 300;
+      font-size: 40px;
+      line-height: 49px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: $primaryColor;
+      @media (max-width: $screen-md) {
+        font-size: 29px;
+      }
+      @media (max-width: $screen-lg) {
+        font-size: 35px;
+        line-height: 35px;
+      }
+    }
+    p {
+      font-weight: 300;
+      font-size: $fontSizeL;
+      line-height: 24px;
+      text-align: center;
+      text-transform: uppercase;
+      color: $primaryColor;
+      border: 2px solid;
+      padding: 13px 18px;
+      box-sizing: border-box;
+      border-radius: 50%;
+      @media (max-width: $screen-lg) {
+        padding: 22px 22px;
+      }
+      @media (max-width: $screen-md) {
+        height: 74px;
+        width: 100px;
+      }
+    }
+  }
+
+  &__genre {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    font-weight: 500;
+    font-size: $fontSizeXs;
+    line-height: 17px;
+    color: $primaryColor;
+    mix-blend-mode: normal;
+    opacity: 0.5;
+    margin-bottom: 30px;
+
+    p:not(:last-child):after {
+      content: ", ";
+    }
+  }
+
+  &__release {
+    display: flex;
+    gap: 50px;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 29px;
+    color: $secondaryColor;
+    margin-bottom: 30px;
+  }
+
+  &__overview {
+    width: 90%;
+    font-weight: 300;
+    font-size: $fontSizeL;
+    line-height: 24px;
+    color: $primaryColor;
+    mix-blend-mode: normal;
+    opacity: 0.5;
+    @media (max-width: $screen-lg) {
+      font-size: 15px;
+    }
+  }
+}
+
+.padd {
+  background-color: #888888;
+  height: 10px;
+  mix-blend-mode: normal;
+  opacity: 0.5;
+}

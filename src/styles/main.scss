@@ -39,7 +39,6 @@
     display: flex;
     align-items: center;
     margin-left: auto;
-    gap: 30px;
     color: $primaryColor;
     text-transform: uppercase;
 
@@ -55,8 +54,13 @@
   .dropdown {
     position: relative;
     display: inline-block;
-    z-index: 10;
+    z-index: 2;
     text-transform: uppercase;
+    width: 166px;
+    text-align: right;
+    @media (max-width: $screen-md) {
+      width: 150px;
+    }
 
     &__hover {
       display: inline-block;
@@ -80,21 +84,24 @@
       visibility: hidden;
       top: 100%;
       left: 0;
-      min-width: 160px;
+      padding: 0;
+      margin: 0;
+      width: 156px;
       background-color: $bgColorLink;
       color: $primaryColor;
       text-transform: uppercase;
       box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
       border-radius: 4px;
+      text-align: left;
       opacity: 0;
       pointer-events: none;
       transition: opacity 150ms ease-in-out;
 
       @media (max-width: $screen-md) {
-        min-width: 72px;
+        width: 138px;
       }
 
-      a {
+      li {
         display: block;
         padding: 10px;
         text-decoration: none;
@@ -119,79 +126,65 @@
 .switcher {
   position: relative;
   display: flex;
-  align-items: center;
   cursor: pointer;
+  padding: 0;
+  gap: 30px;
 
-  input {
-    appearance: none;
-    outline: none;
+  @media (max-width: $screen-md) {
+    gap: 18px;
+  }
+
+  li {
+    list-style-type: none;
+  }
+  &__checkbox {
+    display: flex;
     position: relative;
-  }
 
-  label {
-    @include label($primaryColor, $tertiaryColor);
-  }
+    &_active::after {
+      content: "";
+      background-color: $tertiaryColor;
+      height: 4px;
+      display: block;
+      width: 36px;
+      position: absolute;
+      margin-top: 32px;
+      z-index: 1;
 
-  label:last-child {
-    padding: 0;
-  }
-
-  &__control {
-    padding-right: 30px;
-  }
-
-  &__checkbox:checked+&__control::after {
-    position: absolute;
-    display: block;
-    z-index: 1;
-    top: 66px;
-    width: 40px;
-    height: 4px;
-    content: "";
-    background: $tertiaryColor;
-    transition: all 0.5s;
-
-    @media (max-width: $screen-md) {
-      top: 52px;
-      width: 32px;
-      height: 2px;
+      @media (max-width: $screen-md) {
+        height: 2px;
+        width: 32px;
+        margin-top: 22px;
+      }
     }
   }
-
-  &__checkbox:checked+&__control.large::after {
-    position: absolute;
-    display: block;
-    z-index: 1;
-    top: 66px;
+  li#documentary::after {
     width: 134px;
-    height: 4px;
-    content: "";
-    background: $tertiaryColor;
-    transition: all 0.5s;
-
     @media (max-width: $screen-md) {
-      top: 52px;
-      width: 120px;
-      height: 2px;
+      width: 116px;
     }
   }
-
-  &__checkbox:checked+&__control.medium::after {
-    position: absolute;
-    display: block;
-    z-index: 1;
-    top: 66px;
-    width: 78px;
-    height: 4px;
-    content: "";
-    background: $tertiaryColor;
-    transition: all 0.5s;
-
+  li#horror::after {
+    width: 82px;
     @media (max-width: $screen-md) {
-      top: 52px;
-      width: 70px;
-      height: 2px;
+      width: 68px;
     }
+  }
+  li#comedy::after {
+    width: 82px;
+    @media (max-width: $screen-md) {
+      width: 68px;
+    }
+  }
+  li#crime::after {
+    width: 66px;
+    @media (max-width: $screen-md) {
+      width: 52px;
+    }
+  }
+  a {
+    text-decoration: none;
+    @include label($primaryColor, $tertiaryColor);
   }
 }
 
@@ -227,11 +220,15 @@
   display: flex;
   flex-wrap: wrap;
   margin: 28px 0;
-  gap: 30px;
+  gap: 34px;
 
-   @media (max-width: $screen-md) {
-    gap: 15px;
-   }
+  @media (max-width: $screen-md) {
+    gap: 42px;
+    justify-content: center;
+  }
+  @media (max-width: $screen-lg) {
+    gap: 24px;
+  }
 }
 
 .movie-card {
@@ -246,13 +243,34 @@
     line-height: 14px;
     width: $movieCardWidthMd;
   }
+  @media (max-width: $screen-lg) {
+    line-height: 14px;
+    width: 268px;
+  }
+  &__img {
+    height: 486px;
+    background: url("https://i.ibb.co/6XjvCPv/Bitmap.png");
 
+    @media (max-width: $screen-md) {
+      width: 318px;
+      height: 468px;
+    }
+    @media (max-width: $screen-lg) {
+      height: 414px;
+      width: 268px;
+    } 
+  }
   img {
     height: 486px;
 
     @media (max-width: $screen-md) {
-      height: 416px;
+      height: 468px;
+      width: 318px;
     }
+    @media (max-width: $screen-lg) {
+      height: 414px;
+      width: 268px;
+    } 
   }
 
   &__info {
@@ -260,11 +278,20 @@
     flex-direction: row;
     align-items: center;
   }
+  a {
+    text-decoration: none;
+    color: white;
+  }
 
   &__title {
     font-size: $fontSizeM;
     line-height: 22px;
     opacity: 0.7;
+
+    @media (max-width: $screen-lg) {
+      font-size: 18px;
+    line-height: 18px;
+    } 
   }
 
   &__year {
@@ -285,7 +312,7 @@
     opacity: 0.5;
 
     p:not(:last-child):after {
-      content: ', ';
+      content: ", ";
     }
   }
 }
@@ -298,6 +325,7 @@ footer {
   width: 100%;
   padding: 10px 0;
   background: $borderTopLine;
+  z-index: 3;
 
   @media (max-width: $screen-md) {
     padding: 5px 0;

@@ -1,17 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
+import { IDrop } from "../types/dropdown";
 
-export const Dropdown = () => {
+export const Dropdown = ({ items, dropdownValue, setDropdownValue }: IDrop) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <div className="nav-menu__dropdown">
-      <p>sort by</p>
-      <div className="dropdown">
-        <button className="dropdown__hover">release date</button>
-        <div className="dropdown__menu">
-          <a href="#">rating</a>
-          <a href="#">popularity</a>
-          <a href="#">recommended</a>
-        </div>
-      </div>
+    <div className="dropdown">
+      <button className="dropdown__hover" onClick={() => setIsOpen(!isOpen)}>
+        {
+          items.find(({ value }: { value: string }) => value === dropdownValue)
+            .name
+        }
+      </button>
+      <ul className="dropdown__menu">
+        {items.map(
+          ({
+            id,
+            name,
+            value,
+          }: {
+            id: number;
+            name: string;
+            value: string;
+          }) => (
+            <li
+              onClick={() => {
+                setDropdownValue(value);
+                setIsOpen(false);
+              }}
+              key={id}
+            >
+              {name}
+            </li>
+          )
+        )}
+      </ul>
     </div>
   );
 };

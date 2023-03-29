@@ -1,0 +1,48 @@
+.form-success {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+
+  &__icon {
+    box-sizing: border-box;
+    width: 66px;
+    height: 66px;
+    background: #f65261;
+    border-radius: 50%;
+    border: 1px solid #f65261;
+
+    &::after {
+      content: "\2713";
+      width: 66px;
+      height: 66px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bolder;
+      font-size: 43px;
+    }
+  }
+  &__title{
+    font-family: 'Montserrat';
+font-weight: 300;
+font-size: 40px;
+line-height: 49px;
+letter-spacing: 1px;
+text-transform: uppercase;
+
+
+  }
+  &__desc{
+    font-weight: 400;
+font-size: 20px;
+line-height: 24px;
+text-align: center;
+width: 302px;
+  }
+}
+.modal__content {
+    height: 372px;
+    margin-top: 0;
+}
