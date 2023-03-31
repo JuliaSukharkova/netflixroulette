@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { useNavigate, useSearchParams } from "react-router-dom"
 import { MOVIE_SEARCH } from "../costants/routes";
+import { InputElement, SearchBtn, SearchForm } from "./styled-components/Header/SearchForm";
 
 export const Search = () => {
   const navigate = useNavigate()
@@ -17,13 +18,13 @@ export const Search = () => {
   };
 
   return (
-    <form className="search-form" onSubmit={handleSubmit}>
-      <input
+    <SearchForm onSubmit={handleSubmit}>
+      <InputElement
         onChange={onSearch}
         value={searchValue}
         placeholder="What do you want to watch?"
       />
-      <button>Search</button>
-    </form>
+      <SearchBtn>Search</SearchBtn>
+    </SearchForm>
   );
 };

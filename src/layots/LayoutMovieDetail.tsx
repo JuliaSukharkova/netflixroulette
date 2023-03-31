@@ -1,17 +1,17 @@
 import { Footer } from "../components/Footer"
 import { Outlet } from "react-router-dom"
 import React from "react"
-import "../styles/main.scss"
 import { MovieIdPage } from "../pages/MovieIdPage"
+import { Flex } from "../components/styled-components/Header/Flex"
 
 export const LayoutMovieDetail = () => {
   return (
-    <div className="page">
+    <Flex direction="column">
       <MovieIdPage />
       <main>
         <Outlet />
       </main>
       <Footer />
-    </div>
+    </Flex>
   )
 }

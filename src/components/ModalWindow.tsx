@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { IModal } from "../types/modalwindow";
-import "../styles/modal.scss"
+import { ModalContainer, ModalContent, ModalIcon } from "./styled-components/ModalStyle/WindowStyle";
 
 export const ModalWindow = ({active, setActive, children, onClose}: IModal) => {
     const onKeydown = ({key}: KeyboardEvent) => {
@@ -15,11 +15,11 @@ export const ModalWindow = ({active, setActive, children, onClose}: IModal) => {
         return () => document.removeEventListener('keydown', onKeydown)
     })
   return (
-    <div className={active ? "modal active" : "modal"} onClick={()=> setActive(false)}>
-      <div className={active ? "modal__content active" : "modal__content"} onClick={e => e.stopPropagation()}>
-      <div className="modal__icon" onClick={onClose}></div>
+    <ModalContainer className={active ? 'active' : ''} onClick={()=> setActive(false)}>
+      <ModalContent className={active ? 'active' : ''} onClick={e => e.stopPropagation()}>
+      <ModalIcon onClick={onClose}></ModalIcon>
       {children}
-      </div>
-    </div>
+      </ModalContent>
+    </ModalContainer>
   );
 };

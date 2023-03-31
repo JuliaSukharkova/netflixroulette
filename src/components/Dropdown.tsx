@@ -1,18 +1,24 @@
 import React, { useState } from "react";
 import { IDrop } from "../types/dropdown";
+import {
+  DropdownBtn,
+  DropdownContainer,
+  DropdownList,
+  DropdownMenu,
+} from "./styled-components/DropdownStyle/DropdownStyle";
 
 export const Dropdown = ({ items, dropdownValue, setDropdownValue }: IDrop) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="dropdown">
-      <button className="dropdown__hover" onClick={() => setIsOpen(!isOpen)}>
+    <DropdownContainer>
+      <DropdownBtn onClick={() => setIsOpen(!isOpen)}>
         {
           items.find(({ value }: { value: string }) => value === dropdownValue)
             .name
         }
-      </button>
-      <ul className="dropdown__menu">
+      </DropdownBtn>
+      <DropdownMenu>
         {items.map(
           ({
             id,
@@ -23,7 +29,7 @@ export const Dropdown = ({ items, dropdownValue, setDropdownValue }: IDrop) => {
             name: string;
             value: string;
           }) => (
-            <li
+            <DropdownList
               onClick={() => {
                 setDropdownValue(value);
                 setIsOpen(false);
@@ -31,10 +37,10 @@ export const Dropdown = ({ items, dropdownValue, setDropdownValue }: IDrop) => {
               key={id}
             >
               {name}
-            </li>
+            </DropdownList>
           )
         )}
-      </ul>
-    </div>
+      </DropdownMenu>
+    </DropdownContainer>
   );
 };

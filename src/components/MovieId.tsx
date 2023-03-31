@@ -1,8 +1,13 @@
 import React, { useState } from "react";
-import "../styles/movie.scss";
 import { IMovieDetail } from "../types/moviedetail";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { HOME, MOVIE_SEARCH } from "../costants/routes";
+import { Flex } from "./styled-components/Header/Flex";
+import { MovieIdHeader } from "./styled-components/MovieId/MovieIdHeader";
+import { Logo } from "./styled-components/MovieId/Logo";
+import { Container, InputSearch, SearchDiv } from "./styled-components/MovieId/SearchIcon";
+import { MovieIdContainer, MovieIdGenre, MovieIdImg, MovieIdInfo, MovieIdOverview, MovieIdRelease, MovieIdTitle, MovieIdVote } from "./styled-components/MovieId/FilmStyle";
+import { MovieIdFooter } from "./styled-components/MovieId/MovieIdFooter";
 
 export const MovieId = ({
   id,
@@ -34,42 +39,42 @@ export const MovieId = ({
   };
   return (
     <>
-      <header className="movie-page">
-        <div className="movie-page__header">
+      <MovieIdHeader className="movie-page">
+        <Flex direction="row" position="relative">
         <Link to={`${HOME}`}>
-          <div className="movie-page__logo">netflixroulette</div></Link>
-          <form className="container" onSubmit={handleSubmit}>
-            <input
+          <Logo>netflixroulette</Logo></Link>
+          <Container onSubmit={handleSubmit}>
+            <InputSearch
               onChange={onSearch}
               value={searchValue}
               placeholder="What do you want to watch?"
             />
-            <div className="search"></div>
-          </form>
-        </div>
-        <div key={id} className="movie-id">
-          <img src={poster_path} alt="#" />
-          <div className="movie-id__info">
-            <div className="movie-id__title">
-              <h1>{title}</h1>
-              <p>{vote_average}</p>
-            </div>
-            <div className="movie-id__genre">
+            <SearchDiv className="search"></SearchDiv>
+          </Container>
+        </Flex>
+        <MovieIdContainer  key={id}>
+          <MovieIdImg src={poster_path} alt="#" />
+          <Flex direction="column">
+            <MovieIdInfo>
+              <MovieIdTitle>{title}</MovieIdTitle>
+              <MovieIdVote>{vote_average}</MovieIdVote>
+            </MovieIdInfo>
+            <MovieIdGenre>
               {genres.slice(0, 2).map((genre, index) => (
                 <p key={index}>
                   {genre.charAt(0).toUpperCase() + genre.slice(1)}
                 </p>
               ))}
-            </div>
-            <div className="movie-id__release">
+            </MovieIdGenre>
+            <MovieIdRelease>
               <p>{new Date(release_date).getFullYear()}</p>
               <p>{getTimeFromMins(runtime)}</p>
-            </div>
-            <div className="movie-id__overview">{overview}</div>
-          </div>
-        </div>
-      </header>
-      <div className="padd"></div>
+            </MovieIdRelease>
+            <MovieIdOverview>{overview}</MovieIdOverview>
+          </Flex>
+        </MovieIdContainer>
+      </MovieIdHeader>
+      <MovieIdFooter></MovieIdFooter>
     </>
   );
 };

@@ -16,7 +16,7 @@ export const MovieIdPage =()=>{
 
   useEffect(()=> {
     getMovieDetailAcync({id}, dispatch)
-  })
+  },[id, dispatch])
 
   if (isLoading) {
     return <Spinner />;

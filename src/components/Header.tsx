@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { HOME } from "../costants/routes";
-import "../styles/header.scss";
 import { IAddMovie } from "../types/addmovie";
 import { ModalAddMovie } from "./ModalAddMovie";
 import { ModalWindow } from "./ModalWindow";
 import { Search } from "./Search";
 import axios from "axios";
 import { MOVIES_LIST } from "../costants/endpoints";
-//import { ModalSuccess } from "./ModalSuccess";
+import { Flex, Margin } from "./styled-components/Header/Flex";
+import { HeaderStyle } from "./styled-components/Header/HeaderStyle";
+import { Button } from "./styled-components/Header/Button";
+import { TitleStyle } from "./styled-components/Header/TitleHeader";
 
 export const Header = () => {
   const [modalActive, setModalActive] = useState(false);
@@ -17,26 +19,26 @@ export const Header = () => {
   const Submit = async (form: IAddMovie) => {
     try {
       const response = await axios.post(MOVIES_LIST, form);
-      return response.data
+      return response.data;
     } catch (error: any) {
-      return { error: error.response }
+      return { error: error.response };
     }
   };
   return (
     <>
-      <header className="header">
-        <div className="header__logo">
-          <div>
+      <HeaderStyle>
+        <Flex direction="row" justify="center" position="relative" margin={20}>
+          <Margin margin={60}>
             <Link to={`${HOME}`}>
               <img
                 src="https://i.ibb.co/59Ckp19/netflixroulette-copy.png"
                 alt="logo"
               />
             </Link>
-          </div>
-          <button onClick={() => setModalActive(true)}>+ add movie</button>
-        </div>
-        <h1 className="header__title">FIND YOUR MOVIE</h1>
+          </Margin>
+          <Button onClick={() => setModalActive(true)}>+ add movie</Button>
+        </Flex>
+        <TitleStyle>FIND YOUR MOVIE</TitleStyle>
         <Search />
         <ModalWindow
           active={modalActive}
@@ -44,9 +46,8 @@ export const Header = () => {
           onClose={onClose}
         >
           <ModalAddMovie onSubmit={Submit} />
-          
         </ModalWindow>
-      </header>
+      </HeaderStyle>
     </>
   );
 };

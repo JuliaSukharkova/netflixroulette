@@ -8,6 +8,7 @@ export const getMoviesAsync = async (
   dispatch: Dispatch<MovieAction>
 ) => {
   try {
+    dispatch({type: MovieType.MOVIE_LOADING})
     const response = await axios.get(
       `${MOVIES_LIST}?${order ? `sortBy=${order}&sortOrder=desc&limit=8}` : ""}`
     );
@@ -29,6 +30,7 @@ export const getMoviesbyFilter = async (
   dispatch: Dispatch<MovieAction>
 ) => {
   try {
+    dispatch({type: MovieType.MOVIE_LOADING})
     const response = await axios.get(
       `${MOVIES_LIST}?${
         filterGenres
@@ -54,6 +56,7 @@ export const getMovieSearchAcync = async (
   dispatch: Dispatch<MovieAction>
 ) => {
   try {
+    dispatch({type: MovieType.MOVIE_LOADING})
     const response = await axios.get(
       `${MOVIE_SEARCH}?sortBy=${order}&sortOrder=desc&search=${search}&searchBy=title`
     );
@@ -75,6 +78,7 @@ export const getMovieDetailAcync = async (
   dispatch: Dispatch<MovieAction>
 ) => {
   try {
+    dispatch({type: MovieType.MOVIE_LOADING})
     const response = await axios.get(`${MOVIES_LIST}/${id}`);
     dispatch({
       type: MovieType.MOVIEDETAIL_SUCCESS,

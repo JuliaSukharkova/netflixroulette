@@ -1,5 +1,6 @@
 import React from "react";
 import { IGenre } from "../types/genres";
+import { NavContainer, NavElement, NavItem,  NavList } from "./styled-components/NavigationStyle/NavigationStyle";
 
 export const NavigationMenu = ({
   items,
@@ -7,30 +8,29 @@ export const NavigationMenu = ({
   setGenreValue,
 }: IGenre) => {
   return (
-    <div className="nav-menu__list">
-      <ul className="switcher">
+    <NavContainer>
+      <NavList>
         {items.map(
           ({id, name, value}:{id:number, name: string, value: string}) => (
-            <li
+            <NavItem
               key={id}
               id={value}
               className={`${
-                value === genreValue ? "switcher__checkbox_active" : "switcher__checkbox"
+                value === genreValue ? 'active' : ''
               }`}
             >
-              <a
+              <NavElement
                 href="#"
-                className="switcher__control"
                 onClick={(e) => {
                   setGenreValue(value);
                   e.preventDefault();
                 }}
               >{name}
-              </a>
-            </li>
+              </NavElement>
+            </NavItem>
           )
         )}
-      </ul>
-    </div>
+      </NavList>
+    </NavContainer>
   );
 };

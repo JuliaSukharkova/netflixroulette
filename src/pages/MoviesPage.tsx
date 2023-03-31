@@ -7,8 +7,10 @@ import { Dropdown } from "../components/Dropdown";
 import { NavigationMenu } from "../components/NavigationMenu";
 import { Spinner } from "../components/Spinner";
 import { ErrorMessage } from "../components/ErrorMessage";
-import "../styles/main.scss";
 import { sortItems, genresItems } from "../costants/costants";
+import { MovieResults } from "../components/styled-components/MovieStyle/MovieResult";
+import { Line, Main, MenuNav, NavDropdown } from "../components/styled-components/MovieStyle/Main";
+import { MovieSection } from "../components/styled-components/MovieStyle/MovieStyle";
 
 
 export const MoviesPage = () => {
@@ -29,31 +31,33 @@ export const MoviesPage = () => {
   }, [dispatch, genreValue]);
 
   if (isLoading) {
-    return <Spinner />;
+    return <Spinner />
   } else if (error) {
-    return <ErrorMessage />;
+    return (
+      <ErrorMessage/>
+    )
   }
 
   return (
-    <main className="main">
-      <nav className="nav-menu">
+    <Main>
+      <MenuNav>
         <NavigationMenu
           items={genresItems}
           genreValue={genreValue}
           setGenreValue={setGenreValue}
           />
-        <div className="nav-menu__dropdown">
+        <NavDropdown>
           <p>sort by</p>
           <Dropdown
             items={sortItems}
             dropdownValue={dropdownValue}
             setDropdownValue={setDropdownValue}
           />
-        </div>
-      </nav>
-      <div className="line"></div>
-      <p className="movie-results"><span>{`${amount}`}</span> movies found</p>
-      <section className="movie">
+        </NavDropdown>
+      </MenuNav>
+      <Line></Line>
+      <MovieResults><span>{`${amount}`}</span> movies found</MovieResults>
+      <MovieSection>
         {movies.map(({ id, poster_path, title, release_date, genres }) => (
           <MovieItem
             key={id}
@@ -64,7 +68,7 @@ export const MoviesPage = () => {
             release_date={release_date}
           />
         ))}
-      </section>
-    </main>
+      </MovieSection>
+    </Main>
   );
 };

@@ -25,7 +25,6 @@ export interface AddMovie {
 export interface movieDetailSuccess{
   type: MovieType.MOVIEDETAIL_SUCCESS;
   payload: IMovieDetail;
-  totalAmount?: number;
 }
 interface movieError{
   type: MovieType.MOVIE_ERROR;

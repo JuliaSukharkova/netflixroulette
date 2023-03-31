@@ -1,3 +1,5 @@
+import { createGlobalStyle } from "styled-components";
+
 export const sortItems = [
   { id: 1, name: "Release date", value: "release_date" },
   { id: 2, name: "Rating", value: "vote_average" },
@@ -47,4 +49,47 @@ export type MyValues = {
   comedy: HTMLInputElement;
   time: HTMLInputElement;
   overview: HTMLInputElement;
+};
+
+export const Global = createGlobalStyle`
+    *{
+        margin:0;
+        padding:0;
+        outline: none;
+        box-sizing: border-box;
+        font-family: Montserrat, sans-serif;
+        text-decoration: none;
+        list-style-type: none;
+    }
+    body {
+        font-size: 14px;
+        color: white;
+        background-color: #424242;
+    }
+
+`;
+export const theme = {
+  colors: {
+    primaryColor: "white",
+    secondaryColor: "#f65261",
+    tertiaryColor: "#f38281",
+  },
+  background: {
+    bgColor: "#232323",
+    bgColorBtn: "rgba(96, 96, 96, 0.68)",
+    bgColorOpacity: "rgba(0, 0, 0, 0.9)",
+    bgColorInput: "rgba(50, 50, 50, 0.8)",
+  },
+  fontSize: {
+    fontSizeL: "20px",
+    fontSizeM: "18px",
+    fontSizeS: "16px",
+    fontSizeXs: "14px",
+  },
+  media: {
+    phone: "(max-width: 425px)",
+    portraitTablets: "(max-width: 768px) and (min-width:425px)",
+    smallDesktops: "(min-width: 768px) and (max-width: 991px)",
+    medDesktops: "(min-width: 992px) and (max-width: 1199px)",
+  },
 };

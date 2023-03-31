@@ -1,14 +1,30 @@
 import React, { useState, useRef } from "react";
-import "../styles/modalmovie.scss";
 import { IAddMovie } from "../types/addmovie";
 import { form } from "../costants/costants";
 import { MyValues } from "../costants/costants";
+import {
+  ButtonContainer,
+  CheckboxDropDown,
+  CheckboxInput,
+  CheckboxItem,
+  CheckboxLabel,
+  CheckboxList,
+  CheckboxTitle,
+  ModalButton,
+  ModalCheckbox,
+  ModalForm,
+  ModalInput,
+  ModalItem,
+  ModalName,
+  ModalSection,
+  ModalTitle,
+} from "./styled-components/ModalStyle/ModalMovie";
 
 interface AddFormProps {
   onSubmit: (data: IAddMovie) => void;
 }
 
-export const ModalAddMovie = ({ onSubmit }: AddFormProps ) => {
+export const ModalAddMovie = ({ onSubmit }: AddFormProps) => {
   const [active, setActive] = useState(false);
   const ref = useRef(null);
 
@@ -49,13 +65,13 @@ export const ModalAddMovie = ({ onSubmit }: AddFormProps ) => {
   };
 
   return (
-    <section className="modal-movie">
-      <h1 className="modal-movie__title">Add Movie</h1>
-      <form onSubmit={handleSumbit} className="modal__form">
-        <label htmlFor="title" className="modal__form_item">
-          <span className="modal__form_name">TITLE</span>
-          <input
-            className="modal__form_large"
+    <ModalSection>
+      <ModalTitle>Add Movie</ModalTitle>
+      <ModalForm onSubmit={handleSumbit}>
+        <ModalItem htmlFor="title">
+          <ModalName>TITLE</ModalName>
+          <ModalInput
+            width={406}
             placeholder="Title"
             id="title"
             name="title"
@@ -63,11 +79,11 @@ export const ModalAddMovie = ({ onSubmit }: AddFormProps ) => {
             ref={ref}
             required
           />
-        </label>
-        <label htmlFor="date" className="modal__form_item">
-          <span className="modal__form_name">RELEASE DATE</span>
-          <input
-            className="modal__form_md"
+        </ModalItem>
+        <ModalItem htmlFor="date">
+          <ModalName>RELEASE DATE</ModalName>
+          <ModalInput
+            width={210}
             type="date"
             id="date"
             placeholder="Select Date"
@@ -75,11 +91,11 @@ export const ModalAddMovie = ({ onSubmit }: AddFormProps ) => {
             ref={ref}
             required
           />
-        </label>
-        <label htmlFor="poster" className="modal__form_item">
-          <span className="modal__form_name">Movie Url</span>
-          <input
-            className="modal__form_large"
+        </ModalItem>
+        <ModalItem htmlFor="poster">
+          <ModalName>Movie Url</ModalName>
+          <ModalInput
+            width={406}
             placeholder="https://"
             id="poster"
             name="poster"
@@ -87,52 +103,51 @@ export const ModalAddMovie = ({ onSubmit }: AddFormProps ) => {
             ref={ref}
             required
           />
-        </label>
-        <label htmlFor="rating" className="modal__form_item">
-          <span className="modal__form_name">RATING</span>
-          <input
-            className="modal__form_md"
+        </ModalItem>
+        <ModalItem htmlFor="rating">
+          <ModalName>RATING</ModalName>
+          <ModalInput
+            width={210}
             placeholder="7.8"
             id="rating"
             name="rating"
             ref={ref}
             required
           />
-        </label>
-        <div className="modal__form_item">
-          <p className="modal__form_name">GENRE</p>
-          <div className="checkbox">
-            <div
+        </ModalItem>
+        <ModalItem>
+          <ModalName>GENRE</ModalName>
+          <ModalCheckbox>
+            <CheckboxDropDown
               className={
-                active ? "checkbox-dropdown is-active" : "checkbox-dropdown"
+                active ? "is-active" : ""
               }
               onClick={ToggleClass}
             >
-              <p>Select Genre</p>
-              <div
-                className="checkbox-dropdown__list"
+              <CheckboxTitle>Select Genre</CheckboxTitle>
+              <CheckboxList
                 onClick={(e) => e.stopPropagation()}
               >
                 {form.map((item) => (
-                  <div key={item.name}>
-                    <input
+                  <CheckboxItem key={item.name}>
+                    <CheckboxInput
                       type="checkbox"
                       name={item.name}
                       value={item.value}
                       ref={ref}
                       required
                     />
-                    <label htmlFor={item.htmlFor}>{item.label}</label>
-                  </div>
+                    <CheckboxLabel htmlFor={item.htmlFor}>{item.label}</CheckboxLabel>
+                  </CheckboxItem>
                 ))}
-              </div>
-            </div>
-          </div>
-        </div>
-        <label htmlFor="time" className="modal__form_item">
-          <span className="modal__form_name">RUNTIME</span>
-          <input
-            className="modal__form_md"
+              </CheckboxList>
+            </CheckboxDropDown>
+          </ModalCheckbox>
+        </ModalItem>
+        <ModalItem htmlFor="time">
+          <ModalName>RUNTIME</ModalName>
+          <ModalInput
+            width={210}
             placeholder=" minutes"
             id="time"
             name="time"
@@ -140,29 +155,30 @@ export const ModalAddMovie = ({ onSubmit }: AddFormProps ) => {
             ref={ref}
             required
           />
-        </label>
-        <label htmlFor="overview" className="modal__form_item">
-          <span className="modal__form_name">OVERVIEW</span>
-          <input
+        </ModalItem>
+        <ModalItem htmlFor="overview">
+          <ModalName>OVERVIEW</ModalName>
+          <ModalInput
+            width={636}
+            height={120}
             type="text"
-            className="modal__form_xxl"
             placeholder="Movie description"
             id="overview"
             name="overview"
             ref={ref}
             required
           />
-        </label>
+        </ModalItem>
 
-        <div className="modal-movie__btn">
-          <button type="reset" onClick={onClear}>
+        <ButtonContainer>
+          <ModalButton color="#f65261" background="rgb(0, 0, 0, 0)" type="reset" onClick={onClear}>
             RESET
-          </button>
-          <button className="submit" type="submit">
+          </ModalButton>
+          <ModalButton type="submit">
             SUBMIT
-          </button>
-        </div>
-      </form>
-    </section>
+          </ModalButton>
+        </ButtonContainer>
+      </ModalForm>
+    </ModalSection>
   );
 };

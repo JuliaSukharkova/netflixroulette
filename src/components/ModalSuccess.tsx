@@ -1,14 +1,15 @@
 import React from "react";
-import "../styles/modalsuccess.scss"
+import { Flex } from "./styled-components/Header/Flex";
+import { SuccessDesc, SuccessIcon, SuccessTitle } from "./styled-components/ModalStyle/SuccessStyle";
 
 export const ModalSuccess = () => {
   return (
-    <form className="form-success">
-      <div className="form-success__icon"></div>
-      <div className="form-success__title">congratulations !</div>
-      <div className="form-success__desc">
+    <Flex direction="column" justify="center" align="center" gap={30}>
+      <SuccessIcon></SuccessIcon>
+      <SuccessTitle>congratulations !</SuccessTitle>
+      <SuccessDesc>
         The movie has been added to database successfully
-      </div>
-    </form>
+      </SuccessDesc>
+    </Flex>
   );
 };

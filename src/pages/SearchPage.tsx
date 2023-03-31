@@ -12,6 +12,9 @@ import {
 import { Dropdown } from "../components/Dropdown";
 import { NavigationMenu } from "../components/NavigationMenu";
 import { sortItems, genresItems } from "../costants/costants";
+import { Line, Main, MenuNav, NavDropdown } from "../components/styled-components/MovieStyle/Main";
+import { MovieResults } from "../components/styled-components/MovieStyle/MovieResult";
+import { MovieSection } from "../components/styled-components/MovieStyle/MovieStyle";
 
 export const SearchPage = () => {
   const dispatch = useDispatch();
@@ -47,27 +50,27 @@ export const SearchPage = () => {
     );
   }
   return (
-    <main className="main">
-      <nav className="nav-menu">
+    <Main>
+      <MenuNav>
         <NavigationMenu
           items={genresItems}
           genreValue={genreValue}
           setGenreValue={setGenreValue}
         />
-        <div className="nav-menu__dropdown">
+        <NavDropdown>
           <p>sort by</p>
           <Dropdown
             items={sortItems}
             dropdownValue={dropdownValue}
             setDropdownValue={setDropdownValue}
           />
-        </div>
-      </nav>
-      <div className="line"></div>
-      <p className="movie-results">
+        </NavDropdown>
+      </MenuNav>
+      <Line></Line>
+      <MovieResults>
         <span>{`${amount}`}</span> movies found
-      </p>
-      <section className="movie">
+      </MovieResults>
+      <MovieSection>
         {movies.map(({ id, poster_path, title, release_date, genres }) => (
           <MovieItem
             key={id}
@@ -78,7 +81,7 @@ export const SearchPage = () => {
             release_date={release_date}
           />
         ))}
-      </section>
-    </main>
+      </MovieSection>
+    </Main>
   );
 };
