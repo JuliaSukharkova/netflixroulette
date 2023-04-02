@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { HOME } from "../costants/routes";
-import { IAddMovie } from "../types/addmovie";
 import { ModalAddMovie } from "./ModalAddMovie";
 import { ModalWindow } from "./ModalWindow";
 import { Search } from "./Search";
-import axios from "axios";
-import { MOVIES_LIST } from "../costants/endpoints";
 import { Flex, Margin } from "./styled-components/Header/Flex";
 import { HeaderStyle } from "./styled-components/Header/HeaderStyle";
 import { Button } from "./styled-components/Header/Button";
@@ -16,14 +13,6 @@ export const Header = () => {
   const [modalActive, setModalActive] = useState(false);
   const onClose = () => setModalActive(false);
 
-  const Submit = async (form: IAddMovie) => {
-    try {
-      const response = await axios.post(MOVIES_LIST, form);
-      return response.data;
-    } catch (error: any) {
-      return { error: error.response };
-    }
-  };
   return (
     <>
       <HeaderStyle>
@@ -45,7 +34,7 @@ export const Header = () => {
           setActive={setModalActive}
           onClose={onClose}
         >
-          <ModalAddMovie onSubmit={Submit} />
+          <ModalAddMovie  />
         </ModalWindow>
       </HeaderStyle>
     </>

@@ -1,7 +1,5 @@
-import React, { useState, useRef } from "react";
-import { IAddMovie } from "../types/addmovie";
+import React, { useState } from "react";
 import { form } from "../costants/costants";
-import { MyValues } from "../costants/costants";
 import {
   ButtonContainer,
   CheckboxDropDown,
@@ -9,7 +7,7 @@ import {
   CheckboxItem,
   CheckboxLabel,
   CheckboxList,
-  CheckboxTitle,
+  CheckboxTextArea,
   ModalButton,
   ModalCheckbox,
   ModalForm,
@@ -18,67 +16,96 @@ import {
   ModalName,
   ModalSection,
   ModalTitle,
+  Error,
 } from "./styled-components/ModalStyle/ModalMovie";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
+import { MOVIES_LIST } from "../costants/endpoints";
+import axios from "axios";
+import { ModalSuccess } from "./ModalSuccess";
+import { ModalWindow } from "./ModalWindow";
 
-interface AddFormProps {
-  onSubmit: (data: IAddMovie) => void;
-}
-
-export const ModalAddMovie = ({ onSubmit }: AddFormProps) => {
+type IAddMovie = {
+  title: string;
+  vote_average: number;
+  release_date: string;
+  overview: string;
+  runtime: number;
+  genres: Array<string>;
+  poster_path: string;
+};
+export const ModalAddMovie: React.FC = () => {
   const [active, setActive] = useState(false);
-  const ref = useRef(null);
-
-  const onClear = (ref: any) => {
-    ref.current.value = "";
-  };
+  const [successfulSend, setSuccessfulSend] = useState(false);
+  const [modalActive, setModalActive] = useState(false);
+  const onClose = () => setModalActive(false);
   const ToggleClass = () => {
     setActive(!active);
   };
 
-  const handleSumbit: React.FormEventHandler<HTMLFormElement & MyValues> = (
-    event
-  ) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const {
-      title,
-      date,
-      poster,
-      rating,
-      documentary,
-      crime,
-      horror,
-      comedy,
-      time,
-      overview,
-    } = form;
+  const validationSchema = Yup.object().shape({
+    title: Yup.string()
+      .min(1, "Min. 1 characters")
+      .required("Title is required"),
+    release_date: Yup.date().required("Date is required"),
+    poster_path: Yup.string()
+      .matches(
+        /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+        "Movie URL is required"
+      )
+      .required("Invalid Movie URL"),
+    vote_average: Yup.number()
+      .min(0, "Rating is required")
+      .max(10, "Invalid Rating")
+      .required("Invalid Rating"),
+    genres: Yup.array()
+      .min(1, "Select at least one genre to proceed")
+      .required("Genres is required"),
+    runtime: Yup.number()
+      .min(1, "Runtime is required")
+      .required("Invalid Runtime"),
+    overview: Yup.string()
+      .min(20, "Min. 20 characters")
+      .required("Overview is required"),
+  });
 
-    onSubmit({
-      title: title.value,
-      release_date: date.value,
-      poster_path: poster.value,
-      vote_average: Number(rating.value),
-      overview: overview.value,
-      runtime: Number(time.value),
-      genres: [documentary?.value, crime?.value, horror?.value, comedy?.value],
-    });
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<IAddMovie>({
+    resolver: yupResolver(validationSchema),
+  });
+
+  const onSubmit = async (data: IAddMovie) => {
+    try {
+      const response = await axios.post(MOVIES_LIST, data);
+      if (response.status === 201) {
+        setSuccessfulSend(true);
+      }
+      return response.data;
+    } catch (error: any) {
+      return { error: error.response };
+    }
   };
-
   return (
+    <>
     <ModalSection>
       <ModalTitle>Add Movie</ModalTitle>
-      <ModalForm onSubmit={handleSumbit}>
+      <ModalForm onSubmit={handleSubmit(onSubmit)}>
         <ModalItem htmlFor="title">
           <ModalName>TITLE</ModalName>
           <ModalInput
             width={406}
             placeholder="Title"
             id="title"
-            name="title"
             type="text"
-            ref={ref}
+            {...register("title")}
             required
           />
+          <Error>{errors.title?.message}</Error>
         </ModalItem>
         <ModalItem htmlFor="date">
           <ModalName>RELEASE DATE</ModalName>
@@ -87,10 +114,10 @@ export const ModalAddMovie = ({ onSubmit }: AddFormProps) => {
             type="date"
             id="date"
             placeholder="Select Date"
-            name="date"
-            ref={ref}
+            {...register("release_date")}
             required
           />
+          <Error>{errors.release_date?.message}</Error>
         </ModalItem>
         <ModalItem htmlFor="poster">
           <ModalName>Movie Url</ModalName>
@@ -98,11 +125,11 @@ export const ModalAddMovie = ({ onSubmit }: AddFormProps) => {
             width={406}
             placeholder="https://"
             id="poster"
-            name="poster"
             type="text"
-            ref={ref}
             required
+            {...register("poster_path")}
           />
+          <Error>{errors.poster_path?.message}</Error>
         </ModalItem>
         <ModalItem htmlFor="rating">
           <ModalName>RATING</ModalName>
@@ -110,36 +137,34 @@ export const ModalAddMovie = ({ onSubmit }: AddFormProps) => {
             width={210}
             placeholder="7.8"
             id="rating"
-            name="rating"
-            ref={ref}
+            {...register("vote_average")}
             required
           />
+          <Error>{errors.vote_average?.message}</Error>
         </ModalItem>
         <ModalItem>
           <ModalName>GENRE</ModalName>
           <ModalCheckbox>
             <CheckboxDropDown
-              className={
-                active ? "is-active" : ""
-              }
+              className={active ? "is-active" : ""}
               onClick={ToggleClass}
             >
-              <CheckboxTitle>Select Genre</CheckboxTitle>
-              <CheckboxList
-                onClick={(e) => e.stopPropagation()}
-              >
+              Select Genre
+              <CheckboxList onClick={(e) => e.stopPropagation()}>
                 {form.map((item) => (
                   <CheckboxItem key={item.name}>
                     <CheckboxInput
                       type="checkbox"
-                      name={item.name}
                       value={item.value}
-                      ref={ref}
+                      {...register("genres")}
                       required
                     />
-                    <CheckboxLabel htmlFor={item.htmlFor}>{item.label}</CheckboxLabel>
+                    <CheckboxLabel htmlFor={item.htmlFor}>
+                      {item.label}
+                    </CheckboxLabel>
                   </CheckboxItem>
                 ))}
+                <Error>{errors.genres?.message}</Error>
               </CheckboxList>
             </CheckboxDropDown>
           </ModalCheckbox>
@@ -150,35 +175,48 @@ export const ModalAddMovie = ({ onSubmit }: AddFormProps) => {
             width={210}
             placeholder=" minutes"
             id="time"
-            name="time"
             type="text"
-            ref={ref}
+            {...register("runtime")}
             required
           />
+          <Error>{errors.runtime?.message}</Error>
         </ModalItem>
         <ModalItem htmlFor="overview">
           <ModalName>OVERVIEW</ModalName>
-          <ModalInput
-            width={636}
-            height={120}
-            type="text"
+          <CheckboxTextArea
             placeholder="Movie description"
             id="overview"
-            name="overview"
-            ref={ref}
+            {...register("overview")}
             required
-          />
+          ></CheckboxTextArea>
+          <Error>{errors.overview?.message}</Error>
         </ModalItem>
 
         <ButtonContainer>
-          <ModalButton color="#f65261" background="rgb(0, 0, 0, 0)" type="reset" onClick={onClear}>
+          <ModalButton
+            color="#f65261"
+            background="rgb(0, 0, 0, 0)"
+            type="reset"
+            onClick={() => reset()}
+          >
             RESET
           </ModalButton>
-          <ModalButton type="submit">
+          <ModalButton type="submit" onClick={() => setModalActive(true)}>
             SUBMIT
           </ModalButton>
         </ButtonContainer>
       </ModalForm>
+      
     </ModalSection>
+    {successfulSend && (
+      <ModalWindow
+        active={modalActive}
+        setActive={setModalActive}
+        onClose={onClose}
+      >
+        <ModalSuccess />
+      </ModalWindow>
+    )}
+   </>
   );
 };
