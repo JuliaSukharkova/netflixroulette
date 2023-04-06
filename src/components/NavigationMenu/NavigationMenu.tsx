@@ -1,6 +1,6 @@
 import React from "react";
-import { IGenre } from "../types/genres";
-import { NavContainer, NavElement, NavItem,  NavList } from "./styled-components/NavigationStyle/NavigationStyle";
+import { IGenre } from "../../types/genres";
+import { NavContainer, NavElement, NavItem,  NavList } from "./NavigationStyle";
 
 export const NavigationMenu = ({
   items,

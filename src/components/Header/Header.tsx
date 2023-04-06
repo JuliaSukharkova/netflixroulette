@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { HOME } from "../costants/routes";
-import { ModalAddMovie } from "./ModalAddMovie";
-import { ModalWindow } from "./ModalWindow";
-import { Search } from "./Search";
-import { Flex, Margin } from "./styled-components/Header/Flex";
-import { HeaderStyle } from "./styled-components/Header/HeaderStyle";
-import { Button } from "./styled-components/Header/Button";
-import { TitleStyle } from "./styled-components/Header/TitleHeader";
+import { HOME } from "../../costants/routes";
+import { ModalAddMovie } from "../ModalStyle/ModalMovie/ModalAddMovie";
+import { ModalWindow } from "../ModalStyle/ModalWindow/ModalWindow";
+import { Search } from "../Search/Search";
+import { Flex, Margin } from "../Common/Flex";
+import { HeaderStyle, Button, TitleStyle  } from "./HeaderStyle";
 
 export const Header = () => {
   const [modalActive, setModalActive] = useState(false);

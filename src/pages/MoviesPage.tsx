@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../hooks/useStore";
 import { getMoviesAsync, getMoviesbyFilter } from "../store/movieStore/api";
-import { MovieItem } from "../components/MovieItem";
-import { Dropdown } from "../components/Dropdown";
-import { NavigationMenu } from "../components/NavigationMenu";
-import { Spinner } from "../components/Spinner";
-import { ErrorMessage } from "../components/ErrorMessage";
+import { MovieItem } from "../components/MovieForm/MovieItem";
+import { Dropdown } from "../components/Dropdown/Dropdown";
+import { NavigationMenu } from "../components/NavigationMenu/NavigationMenu";
+import { Spinner } from "../components/Common/Spinner";
+import { ErrorMessage } from "../components/Error/ErrorMessage";
 import { sortItems, genresItems } from "../costants/costants";
-import { MovieResults } from "../components/styled-components/MovieStyle/MovieResult";
-import { Line, Main, MenuNav, NavDropdown } from "../components/styled-components/MovieStyle/Main";
-import { MovieSection } from "../components/styled-components/MovieStyle/MovieStyle";
+import { MovieResults } from "../components/MovieForm/MovieResult";
+import { Line, Main, MenuNav, NavDropdown } from "../components/MovieForm/Main";
+import { MovieSection } from "../components/MovieForm/MovieStyle";
 
 
 export const MoviesPage = () => {

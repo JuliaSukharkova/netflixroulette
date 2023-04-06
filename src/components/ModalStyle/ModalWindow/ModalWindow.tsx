@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { IModal } from "../types/modalwindow";
-import { ModalContainer, ModalContent, ModalIcon } from "./styled-components/ModalStyle/WindowStyle";
+import { IModal } from "../../../types/modalwindow";
+import { ModalContainer, ModalContent, ModalIcon } from "./WindowStyle";
 
 export const ModalWindow = ({active, setActive, children, onClose}: IModal) => {
     const onKeydown = ({key}: KeyboardEvent) => {

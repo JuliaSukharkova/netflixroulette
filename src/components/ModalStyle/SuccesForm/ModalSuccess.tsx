@@ -1,6 +1,6 @@
 import React from "react";
-import { Flex } from "./styled-components/Header/Flex";
-import { SuccessDesc, SuccessIcon, SuccessTitle } from "./styled-components/ModalStyle/SuccessStyle";
+import { Flex } from "../../Common/Flex";
+import { SuccessDesc, SuccessIcon, SuccessTitle } from "./SuccessStyle";
 
 export const ModalSuccess = () => {
   return (

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { useNavigate, useSearchParams } from "react-router-dom"
-import { MOVIE_SEARCH } from "../costants/routes";
-import { InputElement, SearchBtn, SearchForm } from "./styled-components/Header/SearchForm";
+import { MOVIE_SEARCH } from "../../costants/routes";
+import { InputElement, SearchBtn, SearchForm } from "./SearchForm";
 
 export const Search = () => {
   const navigate = useNavigate()
@@ -16,7 +16,7 @@ export const Search = () => {
     event.preventDefault();
     searchValue && navigate(`${MOVIE_SEARCH}/?value=${searchValue}`);
   };
-
+ 
   return (
     <SearchForm onSubmit={handleSubmit}>
       <InputElement

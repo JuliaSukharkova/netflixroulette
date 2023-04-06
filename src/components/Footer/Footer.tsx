@@ -1,5 +1,5 @@
 import React from "react";
-import { FooterImg, FooterComponent } from "./styled-components/FooterStyle/FooterStyle";
+import { FooterImg, FooterComponent } from "./FooterStyle";
 
 export const Footer = () => {
   return (

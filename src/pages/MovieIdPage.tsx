@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useParams} from "react-router-dom";
-import { MovieId } from "../components/MovieId";
+import { MovieId } from "../components/MovieId/MovieId";
 import { useTypedSelector } from "../hooks/useStore";
 import { getMovieDetailAcync } from "../store/movieStore/api";
-import { Spinner } from "../components/Spinner";
-import { ErrorMessage } from "../components/ErrorMessage";
+import { Spinner } from "../components/Common/Spinner";
+import { ErrorMessage } from "../components/Error/ErrorMessage";
 
 export const MovieIdPage =()=>{
     const {id} =useParams() as any;

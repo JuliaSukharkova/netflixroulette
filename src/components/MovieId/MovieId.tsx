@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { IMovieDetail } from "../types/moviedetail";
+import { IMovieDetail } from "../../types/moviedetail";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { HOME, MOVIE_SEARCH } from "../costants/routes";
-import { Flex } from "./styled-components/Header/Flex";
-import { MovieIdHeader } from "./styled-components/MovieId/MovieIdHeader";
-import { Logo } from "./styled-components/MovieId/Logo";
-import { Container, InputSearch, SearchDiv } from "./styled-components/MovieId/SearchIcon";
-import { MovieIdContainer, MovieIdGenre, MovieIdImg, MovieIdInfo, MovieIdOverview, MovieIdRelease, MovieIdTitle, MovieIdVote } from "./styled-components/MovieId/FilmStyle";
-import { MovieIdFooter } from "./styled-components/MovieId/MovieIdFooter";
+import { HOME, MOVIE_SEARCH } from "../../costants/routes";
+import { Flex } from "../Common/Flex";
+import { MovieIdHeader } from "./MovieIdHeader";
+import { Logo } from "./Logo";
+import { Container, InputSearch, SearchDiv } from "./SearchIcon";
+import { MovieIdContainer, MovieIdGenre, MovieIdImg, MovieIdInfo, MovieIdOverview, MovieIdRelease, MovieIdTitle, MovieIdVote } from "./FilmStyle";
+import { MovieIdFooter } from "./MovieIdFooter";
 
 export const MovieId = ({
   id,

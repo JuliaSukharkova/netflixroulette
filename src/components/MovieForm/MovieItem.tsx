@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { MOVIE } from "../costants/routes";
-import { IMovie } from "../types/movie";
-import { Flex } from "./styled-components/Header/Flex";
-import { MovieContainer, MovieGenre, MovieImg, MovieTitle, MovieYear } from "./styled-components/MovieStyle/MovieStyle";
+import { MOVIE } from "../../costants/routes";
+import { IMovie } from "../../types/movie";
+import { Flex } from "../Common/Flex";
+import { MovieContainer, MovieGenre, MovieImg, MovieTitle, MovieYear } from "./MovieStyle";
 
 export const MovieItem = ({
   id,
