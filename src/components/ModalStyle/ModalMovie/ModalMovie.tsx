@@ -114,6 +114,7 @@ export const CheckboxDropDown = styled.button({
   outline: "none",
   userSelect: "none",
   border: "none",
+  cursor: "pointer",
   "::after": {
     content: "'\u25BC'",
     position: "absolute",
@@ -126,11 +127,12 @@ export const CheckboxDropDown = styled.button({
       transform: "rotate(180deg)"
     },
   },
-  "&.is-active div": {
+  "&.is-active:hover div": {
+    visibility: "visible",
     opacity: "1",
     pointerEvents: "auto",
     cursor: "pointer"
-  },
+  }
 });
 
 

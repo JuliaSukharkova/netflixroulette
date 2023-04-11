@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { form } from "../../../costants/costants";
 import {
   ButtonContainer,
@@ -79,6 +79,7 @@ export const ModalAddMovie: React.FC = () => {
       return { error: error.response };
     }
   };
+
   return (
     <>
       <ModalSection>

@@ -52,13 +52,13 @@ export const getMoviesbyFilter = async (
 };
 
 export const getMovieSearchAcync = async (
-  { search, order }: { search: string; order: string },
+  { search, order, filterGenres }: { search: string; order: string; filterGenres: string },
   dispatch: Dispatch<MovieAction>
 ) => {
   try {
     dispatch({type: MovieType.MOVIE_LOADING})
     const response = await axios.get(
-      `${MOVIE_SEARCH}?sortBy=${order}&sortOrder=desc&search=${search}&searchBy=title`
+      `${MOVIE_SEARCH}?sortBy=${order}&sortOrder=desc&search=${search}&searchBy=title&filter=${filterGenres}`
     );
     dispatch({
       type: MovieType.MOVIE_SUCCESS,

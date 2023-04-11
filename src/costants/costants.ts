@@ -7,7 +7,7 @@ export const sortItems = [
 ];
 
 export const genresItems = [
-  { id: 1, name: `All`, value: "" },
+  { id: 1, name: "All", value: "" },
   { id: 2, name: "Documentary", value: "documentary" },
   { id: 3, name: "Horror", value: "horror" },
   { id: 4, name: "Comedy", value: "comedy" },

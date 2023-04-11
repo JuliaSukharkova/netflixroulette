@@ -37,7 +37,6 @@ export const MoviesPage = () => {
       <ErrorMessage/>
     )
   }
-
   return (
     <Main>
       <MenuNav>
@@ -71,4 +70,6 @@ export const MoviesPage = () => {
       </MovieSection>
     </Main>
   );
+ 
 };
+ 

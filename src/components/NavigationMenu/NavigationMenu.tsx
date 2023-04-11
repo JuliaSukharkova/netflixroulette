@@ -11,15 +11,17 @@ export const NavigationMenu = ({
     <NavContainer>
       <NavList>
         {items.map(
-          ({id, name, value}:{id:number, name: string, value: string}) => (
+          ({id, name, value}) => (
             <NavItem
               key={id}
               id={value}
+              data-testid={value}
               className={`${
                 value === genreValue ? 'active' : ''
               }`}
             >
               <NavElement
+                id={value}
                 href="#"
                 onClick={(e) => {
                   setGenreValue(value);

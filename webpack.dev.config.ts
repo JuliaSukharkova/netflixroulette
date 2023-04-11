@@ -8,6 +8,7 @@ import HtmlWebpackPlugin from "html-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import ESLintPlugin from "eslint-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import CssMinimizerPlugin from "css-minimizer-webpack-plugin"
 
 interface Configuration extends WebpackConfiguration {
   devServer?: WebpackDevServerConfiguration;
@@ -36,31 +37,22 @@ const config: Configuration = {
         },
       },
       {
-        test: /\.css$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {},
-          },
-          "css-loader",
-        ],
-      },
-      {
         test: /\.(png|svg|jpg)$/,
         use: ["file-loader"],
       },
       {
-        test: /\.s[ac]ss$/,
+        test: /\.s?css$/,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {},
-          },
-          "css-loader",
-          "sass-loader",
+          MiniCssExtractPlugin.loader,
+          { loader: "css-loader", options: { sourceMap: true } },
+          { loader: "sass-loader", options: { sourceMap: true } },
         ],
       },
     ],
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [new CssMinimizerPlugin()]
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
