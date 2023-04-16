@@ -29,7 +29,7 @@ describe("render Search Input", () => {
         </BrowserRouter>
       </ThemeProvider>
     );
-    const button = screen.getByRole("button");
+    const button = screen.getByRole('button', { name: /search/i });
     const inputEl = screen.getByTestId("input");
     fireEvent.change(inputEl, {
       target: { value: "Zoo" },
@@ -45,7 +45,7 @@ describe("render Search Input", () => {
         </BrowserRouter>
       </ThemeProvider>
     );
-    const button = screen.getByRole("button");
+    const button = screen.getByRole('button', { name: /search/i });
     const inputEl = screen.getByTestId("input");
     fireEvent.change(inputEl, {
       target: { value: "Zoo" },

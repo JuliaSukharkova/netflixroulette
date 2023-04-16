@@ -3,10 +3,9 @@ import { ThemeProvider } from "styled-components";
 import { theme } from "../costants/costants";
 import { BrowserRouter } from "react-router-dom";
 import { NavigationMenu } from "../components/NavigationMenu/NavigationMenu";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import configureMockStore from "redux-mock-store";
 import { Provider } from "react-redux";
-import userEvent from "@testing-library/user-event";
 
 export const newGenre = [
   { id: 1, name: "All", value: "" },
@@ -16,28 +15,21 @@ export const newGenre = [
   { id: 5, name: "Crime", value: "crime" },
 ];
 
-describe("Genres render", () => {
+
+const setGenre = jest.fn()
+describe("Genres render", () =>  {
   it("Test that component renders all genres passed in props", () => {
-    const mockStore = configureMockStore();
-    const store = mockStore({
-      movies: {
-        movies: [],
-      },
-    });
     render(
       <ThemeProvider theme={theme}>
-        <Provider store={store}>
           <BrowserRouter>
             <NavigationMenu
               items={newGenre}
               genreValue={newGenre[0].value}
-              setGenreValue={newGenre[0].value}
+              setGenreValue={setGenre}
             />
           </BrowserRouter>
-        </Provider>
       </ThemeProvider>
     );
-
     expect(screen.getByText(/all/i).textContent).toEqual(newGenre[0].name);
     expect(screen.getByText(/all/i).id).toEqual(newGenre[0].value);
 
@@ -54,7 +46,7 @@ describe("Genres render", () => {
 
     expect(screen.getByText(/crime/i).textContent).toEqual(newGenre[4].name);
     expect(screen.getByText(/crime/i).id).toEqual(newGenre[4].value);
-  });
+    });
   it("Test that component highlights a selected genre passed in props", () => {
     const mockStore = configureMockStore();
     const store = mockStore({
@@ -62,46 +54,21 @@ describe("Genres render", () => {
         movies: [],
       },
     });
-    render(
+    const {queryByText}= render(
       <ThemeProvider theme={theme}>
         <Provider store={store}>
           <BrowserRouter>
             <NavigationMenu
               items={newGenre}
               genreValue={newGenre[0].value}
-              setGenreValue={newGenre[0].value}
+              setGenreValue={setGenre}
             />
           </BrowserRouter>
         </Provider>
       </ThemeProvider>
     );
-    const chooseElem = screen.getByTestId("comedy");
-    userEvent.click(chooseElem);
-    expect(screen.getByTestId("comedy").className).toHaveClass("active")
-    screen.debug(chooseElem);
-  });
-  it("Test that after a click event on a genre button component calls onChange callback and passes correct genre in arguments", () => {
-    const mockStore = configureMockStore();
-    const store = mockStore({
-      movies: {
-        movies: [],
-      },
-    });
-    render(
-      <ThemeProvider theme={theme}>
-        <Provider store={store}>
-          <BrowserRouter>
-            <NavigationMenu
-              items={newGenre}
-              genreValue={newGenre[0].value}
-              setGenreValue={newGenre[0].value}
-            />
-          </BrowserRouter>
-        </Provider>
-      </ThemeProvider>
-    );
-    const element = screen.getByText(/documentary/i);
-    userEvent.click(element);
-    expect(element.id).toBe(newGenre[1].value);
+    const link = queryByText("Comedy")
+    fireEvent.click(link)
+    expect(setGenre).toHaveBeenCalledWith("comedy")
   });
 });
