@@ -91,3 +91,24 @@ export const getMovieDetailAcync = async (
     });
   }
 };
+ 
+export const getMovieUpdateAsync = async (
+  dispatch: Dispatch<MovieAction>
+) => {
+  try {
+    dispatch({type: MovieType.MOVIE_LOADING})
+    const response = await axios.get(
+      `${MOVIES_LIST}`
+    );
+    dispatch({
+      type: MovieType.MOVIE_SUCCESS,
+      payload: response.data.data,
+      totalAmount: response.data.totalAmount,
+    });
+  } catch (error: any) {
+    dispatch({
+      type: MovieType.MOVIE_ERROR,
+      payload: error,
+    });
+  }
+};

@@ -10,6 +10,7 @@ export const InputSearch = styled.input`
   right: 4px;
   width: 219px;
   height: 30px;
+  padding-left: 5px;
   outline: none;
   border: none;
   transition: all 1s;

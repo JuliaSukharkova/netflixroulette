@@ -5,11 +5,20 @@ import { ModalAddMovie } from "../ModalStyle/ModalMovie/ModalAddMovie";
 import { ModalWindow } from "../ModalStyle/ModalWindow/ModalWindow";
 import { Search } from "../Search/Search";
 import { Flex, Margin } from "../Common/Flex";
-import { HeaderStyle, Button, TitleStyle  } from "./HeaderStyle";
+import { HeaderStyle, Button, TitleStyle } from "./HeaderStyle";
+import { ModalSuccess } from "../ModalStyle/SuccesForm/ModalSuccess";
+import { getMovieUpdateAsync } from "../../store/movieStore/api";
+import { useDispatch } from "react-redux";
 
 export const Header = () => {
   const [modalActive, setModalActive] = useState(false);
-  const onClose = () => setModalActive(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const dispatch = useDispatch();
+  const onClose = () => {
+    setModalActive(false);
+    setShowSuccessModal(false);
+    getMovieUpdateAsync(dispatch);
+  };
 
   return (
     <>
@@ -32,7 +41,11 @@ export const Header = () => {
           setActive={setModalActive}
           onClose={onClose}
         >
-          <ModalAddMovie  />
+          {showSuccessModal ? (
+            <ModalSuccess />
+          ) : (
+            <ModalAddMovie setShowSuccessModal={setShowSuccessModal} />
+          )}
         </ModalWindow>
       </HeaderStyle>
     </>

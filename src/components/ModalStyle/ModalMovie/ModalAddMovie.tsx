@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { form } from "../../../costants/costants";
 import {
   ButtonContainer,
@@ -26,35 +25,42 @@ import { MOVIES_LIST } from "../../../costants/endpoints";
 import axios from "axios";
 import { IAddMovie } from "../../../types/movie";
 
-export const ModalAddMovie: React.FC = () => {
+export const ModalAddMovie = ({ setShowSuccessModal }: any) => {
   const [active, setActive] = useState(false);
-  const [successfulSend, setSuccessfulSend] = useState(false);
   const ToggleClass = () => {
     setActive(!active);
   };
 
   const validationSchema = Yup.object().shape({
     title: Yup.string()
+      .typeError("Enter title")
       .min(1, "Min. 1 characters")
       .required("Title is required"),
-    release_date: Yup.date().required("Date is required"),
+    release_date: Yup.date()
+      .typeError("Date is required")
+      .required("Date is required"),
     poster_path: Yup.string()
+      .typeError("Enter Movie URL")
       .matches(
         /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
         "Movie URL is required"
       )
       .required("Invalid Movie URL"),
     vote_average: Yup.number()
+      .typeError("Enter rating")
       .min(0, "Rating is required")
       .max(10, "Invalid Rating")
       .required("Invalid Rating"),
     genres: Yup.array()
+      .typeError("Select at least one genre to proceed")
       .min(1, "Select at least one genre to proceed")
       .required("Genres is required"),
     runtime: Yup.number()
+      .typeError("Enter runtime")
       .min(1, "Runtime is required")
       .required("Invalid Runtime"),
     overview: Yup.string()
+      .typeError("Enter overview")
       .min(20, "Min. 20 characters")
       .required("Overview is required"),
   });
@@ -71,9 +77,7 @@ export const ModalAddMovie: React.FC = () => {
   const onSubmit = async (data: IAddMovie) => {
     try {
       const response = await axios.post(MOVIES_LIST, data);
-      if (response.status === 201) {
-        setSuccessfulSend(true);
-      }
+      setShowSuccessModal(true);
       return response.data;
     } catch (error: any) {
       return { error: error.response };

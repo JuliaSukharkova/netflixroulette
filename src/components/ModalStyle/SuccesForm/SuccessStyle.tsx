@@ -31,6 +31,7 @@ export const SuccessDesc = styled.div`
   line-height: 24px;
   text-align: center;
   width: 302px;
+  margin-bottom: 40px;
 `;
 export const ModalContent = styled.div`
   height: 372px;
