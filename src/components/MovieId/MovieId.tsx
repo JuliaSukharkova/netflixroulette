@@ -8,6 +8,7 @@ import { Logo } from "./Logo";
 import { Container, InputSearch, SearchDiv } from "./SearchIcon";
 import { MovieIdContainer, MovieIdGenre, MovieIdImg, MovieIdInfo, MovieIdOverview, MovieIdRelease, MovieIdTitle, MovieIdVote } from "./FilmStyle";
 import { MovieIdFooter } from "./MovieIdFooter";
+import { getTimeFromMins } from "../../types/utiles";
 
 export const MovieId = ({
   id,
@@ -32,16 +33,11 @@ export const MovieId = ({
     searchValue && navigate(`${MOVIE_SEARCH}/?value=${searchValue}`);
   };
 
-  const getTimeFromMins = (runtime: any) => {
-    const hours = Math.trunc(runtime / 60);
-    const minutes = runtime % 60;
-    return hours + "h" + minutes + "min";
-  };
   return (
     <>
       <MovieIdHeader className="movie-page">
         <Flex direction="row" position="relative">
-        <Link to={`${HOME}`}>
+        <Link to={HOME}>
           <Logo>netflixroulette</Logo></Link>
           <Container onSubmit={handleSubmit}>
             <InputSearch

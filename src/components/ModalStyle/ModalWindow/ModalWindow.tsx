@@ -9,10 +9,8 @@ export const ModalWindow = ({
   onClose,
 }: IModal) => {
   const onKeydown = ({ key }: KeyboardEvent) => {
-    switch (key) {
-      case "Escape":
+    if (key == "Escape") {
         onClose();
-        break;
     }
   };
   useEffect(() => {

@@ -112,3 +112,23 @@ export const getMovieUpdateAsync = async (
     });
   }
 };
+
+export const postMovieAsync = async (
+  data: any, setShowSuccessModal: any,
+  dispatch: Dispatch<MovieAction>
+) => {
+  try {
+    dispatch({type: MovieType.MOVIE_LOADING})
+    const response = await axios.post(MOVIES_LIST, data);
+    setShowSuccessModal(true);
+    dispatch({
+      type: MovieType.ADD_MOVIE,
+      payload: response.data,
+    });
+  } catch (error: any) {
+    dispatch({
+      type: MovieType.MOVIE_ERROR,
+      payload: error,
+    });
+  }
+};

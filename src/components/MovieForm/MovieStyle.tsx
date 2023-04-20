@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const MovieSection = styled.section`
-display: flex;
+  display: flex;
   flex-wrap: wrap;
   margin: 28px 0;
   gap: 34px;
@@ -16,7 +16,7 @@ display: flex;
   @media ${(props) => props.theme.media.medDesktops} {
     gap: 28px;
   }
-`
+`;
 
 export const MovieContainer = styled.div`
   display: flex;
@@ -72,9 +72,9 @@ export const MovieImg = styled.div`
       width: 268px;
     }
     @media ${(props) => props.theme.media.medDesktops} {
-    height: 414px;
-    width: 296px;
-  }
+      height: 414px;
+      width: 296px;
+    }
   }
 `;
 
@@ -93,7 +93,7 @@ export const MovieYear = styled.p`
   padding: 4px 8px;
   border-radius: 4px;
   opacity: 0.5;
-  border: 1px solid #979797;
+  border: 1px solid ${(props) => props.theme.colors.borderColor};
   text-align: center;
 `;
 

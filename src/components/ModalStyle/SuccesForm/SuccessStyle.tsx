@@ -1,23 +1,23 @@
 import styled from "styled-components";
 
-export const SuccessIcon = styled.div({
-  width: "66px",
-  height: "66px",
-  background: "#f65261",
-  borderRadius: "50%",
-  border: "1px solid #f65261",
+export const SuccessIcon = styled.div`
+  width: 66px;
+  height: 66px;
+  background: ${(props) => props.theme.colors.secondaryColor};
+  border-radius: 50%;
+  border: 1px solid ${(props) => props.theme.colors.secondaryColor};
 
-  "&::after": {
-    content: "'\u2714'",
-    width: "66px",
-    height: "66px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    fontWeight: "bolder",
-    fontSize: "43px",
-  },
-});
+  &::after{
+    content: "\u2714";
+    width: 66px;
+    height: 66px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bolder;
+    font-size: 43px;
+  }
+`
 export const SuccessTitle = styled.div`
   font-weight: 300;
   font-size: 40px;

@@ -46,9 +46,9 @@ export const NavDropdown = styled.div`
 export const Line = styled.div`
   position: relative;
   width: 100%;
-  border-top: 4px solid #424242;
+  border-top: 4px solid ${(props) => props.theme.colors.lineColor};
 
   @media ${(props) => props.theme.media.portraitTablets} {
-    border-top: 2px solid #424242;
+    border-top: 2px solid ${(props) => props.theme.colors.lineColor};
   }
 `;

@@ -48,7 +48,7 @@ export const ModalInput = styled.input`
   border: none;
   color: ${(props) => props.theme.colors.primaryColor};
   padding-left: 18px;
-  background: rgba(50, 50, 50, 0.948044);
+  background: ${(props) => props.theme.background.bgInputModal};
   mix-blend-mode: normal;
   opacity: 0.8;
   border-radius: 4px;
@@ -56,7 +56,7 @@ export const ModalInput = styled.input`
   width: ${(props) => props.width + "px"};
 
   &::placeholder {
-    color: rgb(159, 159, 159);
+    color: ${(props) => props.theme.colors.placeholderModalColor};
     position: absolute;
     top: 10px;
     left: 18px;
@@ -86,7 +86,7 @@ export const ModalButton = styled.button<Btn>`
   text-align: center;
   text-transform: uppercase;
   color: ${(props) => props.color || props.theme.colors.primaryColor};
-  border: 1.5px solid #f65261;
+  border: 1.5px solid ${(props) => props.theme.colors.secondaryColor};
   border-radius: 4px;
   box-sizing: border-box;
   background: ${(props) =>
@@ -99,75 +99,75 @@ export const ModalCheckbox = styled.div`
   z-index: 11;
 `;
 
-export const CheckboxDropDown = styled.button({
-  position: "relative",
-  display: "flex",
-  alignItems: "center",
-  width: "406px",
-  height: "40px",
-  background: "rgba(50, 50, 50, 0.948044)",
-  color: "white",
-  opacity: "0.8",
-  paddingLeft: "18px",
-  mixBlendMode: "normal",
-  borderRadius: "4px",
-  outline: "none",
-  userSelect: "none",
-  border: "none",
-  cursor: "pointer",
-  "::after": {
-    content: "'\u25BC'",
-    position: "absolute",
-    color: "rgb(243, 130, 129)",
-    right: "10px",
-    fontSize:"12px",
-  },
-  "&.is-active": {
-    "::after": {
-      transform: "rotate(180deg)"
-    },
-  },
-  "&.is-active:hover div": {
-    visibility: "visible",
-    opacity: "1",
-    pointerEvents: "auto",
-    cursor: "pointer"
+export const CheckboxDropDown = styled.button`
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 406px;
+  height: 40px;
+  background: ${(props) => props.theme.background.bgInputModal};
+  color: ${(props) => props.theme.colors.primaryColor};
+  opacity: 0.8;
+  padding-left: 18px;
+  mix-blend-mode: normal;
+  border-radius: 4px;
+  outline: none;
+  user-select: none;
+  border: none;
+  cursor: pointer;
+  &::after {
+    content: "\u25BC";
+    position: absolute;
+    color: ${(props) => props.theme.colors.checkBoxModalColor};
+    right: 10px;
+    font-size: 12px;
   }
-});
+  &.is-active {
+    &::after {
+      transform: rotate(180deg);
+    }
+  }
+  &.is-active:hover div {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    cursor: pointer;
+  }
+`;
 
+export const CheckboxList = styled.div`
+  position: absolute;
+  top: 100%;
+  left: -1px;
+  right: -1px;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+  height: 100px;
+  pointer-events: none;
+  text-align: initial;
 
-export const CheckboxList = styled.div({
-  position: "absolute",
-  top: "100%",
-  left: "-1px",
-  right: "-1px",
-  opacity: "0",
-  transition: "opacity 0.4s ease-in-out",
-  height: "100px",
-  pointerEvents: "none",
-  textAlign: "initial",
+  & label:hover::before,
+  input:hover + label::before {
+    background-color: ${(props) => props.theme.colors.secondaryColor};
+  }
+  & input:checked + label::before {
+    content: "\u2714";
+    color: ${(props) => props.theme.colors.primaryColor};
+    text-align: center;
+    background-color: ${(props) => props.theme.colors.secondaryColor};
+  }
+`;
 
-  "& label:hover::before, input:hover + label::before": {
-    backgroundColor: "#f65261",
-  },
-  "& input:checked + label::before": {
-    content: "'\u2714'",
-    color: "white",
-    textAlign: "center",
-    backgroundColor: "#f65261",
-  },
-});
-
-export const CheckboxItem = styled.div({
-  display: "block",
-  padding: "6px",
-  transition: "all 0.2s ease-out",
-  background: " rgb(35, 35, 35)",
-  boxShadow:
-    "0px 0px 2px rgba(0, 0, 0, 0.1), 0px 2px 10px rgba(0, 0, 0, 0.1), 0px 10px 20px rgba(0, 0, 0, 0.1), 0px 10px 50px rgba(0, 0, 0, 0.1)",
-  backdropFilter: "blur(13.5914px)",
-  borderRadius: "4px",
-});
+export const CheckboxItem = styled.div`
+  display: block;
+  padding: 6px;
+  transition: all 0.2s ease-out;
+  background: ${(props) => props.theme.background.bgCheckBoxItem};
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1), 0px 2px 10px rgba(0, 0, 0, 0.1),
+    0px 10px 20px rgba(0, 0, 0, 0.1), 0px 10px 50px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(13.5914px);
+  border-radius: 4px;
+`;
 
 export const CheckboxInput = styled.input`
   cursor: pointer;
@@ -194,18 +194,18 @@ export const CheckboxTextArea = styled.textarea`
     left: 18px;
   }
 `;
-export const CheckboxLabel = styled.label({
-  "&::before": {
-    content: "''",
-    width: "16px",
-    display: "inline-block",
-    height: "16px",
-    marginRight: "6px",
-    borderRadius: "0.15em",
-    outline: "none",
-    background: "white",
-  },
-});
+export const CheckboxLabel = styled.label`
+  &::before {
+    content: "";
+    width: 16px;
+    display: inline-block;
+    height: 16px;
+    margin-right: 6px;
+    border-radius: 0.15em;
+    outline: none;
+    background: ${(props) => props.theme.colors.primaryColor};
+  }
+`;
 
 export const Error = styled.p`
   position: absolute;

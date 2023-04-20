@@ -25,7 +25,7 @@ export const Header = () => {
       <HeaderStyle>
         <Flex direction="row" justify="center" position="relative" margin={20}>
           <Margin margin={60}>
-            <Link to={`${HOME}`}>
+            <Link to={HOME}>
               <img
                 src="https://i.ibb.co/59Ckp19/netflixroulette-copy.png"
                 alt="logo"
