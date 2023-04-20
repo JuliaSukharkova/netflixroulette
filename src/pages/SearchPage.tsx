@@ -6,8 +6,7 @@ import { MovieItem } from "../components/MovieForm/MovieItem";
 import { Spinner } from "../components/Common/Spinner";
 import { ErrorMessage } from "../components/Error/ErrorMessage";
 import {
-  getMovieSearchAcync,
-  getMoviesbyFilter,
+  getMovieSearchAcync
 } from "../store/movieStore/api";
 import { Dropdown } from "../components/Dropdown/Dropdown";
 import { NavigationMenu } from "../components/NavigationMenu/NavigationMenu";
@@ -27,14 +26,12 @@ export const SearchPage = () => {
 
   const [dropdownValue, setDropdownValue] = useState(sortItems[0].value);
 
-  
   useEffect(() => {
-    getMoviesbyFilter({ filterGenres: genreValue }, dispatch);
-  }, [dispatch, genreValue]);
-
-  useEffect(() => {
-    getMovieSearchAcync({ search: searchValue, order: dropdownValue }, dispatch);
-  }, [searchValue,dropdownValue, dispatch]);
+    getMovieSearchAcync(
+      { search: searchValue, order: dropdownValue, filterGenres: genreValue },
+      dispatch
+    );
+  }, [searchValue, dropdownValue, genreValue, dispatch]);
 
   if (isLoading) {
     return <Spinner />;
@@ -44,8 +41,8 @@ export const SearchPage = () => {
     return (
       <Main>
         <MovieResults>
-        <span>{`${amount}`}</span> movies found
-      </MovieResults>
+          <span>{`${amount}`}</span> movies found
+        </MovieResults>
       </Main>
     );
   }

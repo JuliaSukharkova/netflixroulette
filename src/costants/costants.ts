@@ -7,7 +7,7 @@ export const sortItems = [
 ];
 
 export const genresItems = [
-  { id: 1, name: `All`, value: "" },
+  { id: 1, name: "All", value: "" },
   { id: 2, name: "Documentary", value: "documentary" },
   { id: 3, name: "Horror", value: "horror" },
   { id: 4, name: "Comedy", value: "comedy" },
@@ -73,12 +73,24 @@ export const theme = {
     primaryColor: "white",
     secondaryColor: "#f65261",
     tertiaryColor: "#f38281",
+    boxShadowColor: "rgba(0, 0, 0, 0.3)",
+    placeholderModalColor: "rgb(159, 159, 159)",
+    checkBoxModalColor: "rgb(243 , 130, 129)",
+    lineColor: "#424242",
+    borderColor: "#979797",
+    inputFocusColor: "#ffffff90"
   },
   background: {
     bgColor: "#232323",
     bgColorBtn: "rgba(96, 96, 96, 0.68)",
     bgColorOpacity: "rgba(0, 0, 0, 0.9)",
+    bgColorTransparent: "rgba(0, 0, 0, 0)",
     bgColorInput: "rgba(50, 50, 50, 0.8)",
+    bgHoverDrop: "#888",
+    bgInputModal: "rgba(50, 50, 50, 0.948044)",
+    bgCheckBoxItem: "rgb(35, 35, 35)",
+    bgModalContainer: "rgba(35, 35, 35, 0.9)",
+    bgFooter: "#888888",
   },
   fontSize: {
     fontSizeL: "20px",

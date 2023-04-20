@@ -52,13 +52,13 @@ export const getMoviesbyFilter = async (
 };
 
 export const getMovieSearchAcync = async (
-  { search, order }: { search: string; order: string },
+  { search, order, filterGenres }: { search: string; order: string; filterGenres: string },
   dispatch: Dispatch<MovieAction>
 ) => {
   try {
     dispatch({type: MovieType.MOVIE_LOADING})
     const response = await axios.get(
-      `${MOVIE_SEARCH}?sortBy=${order}&sortOrder=desc&search=${search}&searchBy=title`
+      `${MOVIE_SEARCH}?sortBy=${order}&sortOrder=desc&search=${search}&searchBy=title&filter=${filterGenres}`
     );
     dispatch({
       type: MovieType.MOVIE_SUCCESS,
@@ -82,6 +82,47 @@ export const getMovieDetailAcync = async (
     const response = await axios.get(`${MOVIES_LIST}/${id}`);
     dispatch({
       type: MovieType.MOVIEDETAIL_SUCCESS,
+      payload: response.data,
+    });
+  } catch (error: any) {
+    dispatch({
+      type: MovieType.MOVIE_ERROR,
+      payload: error,
+    });
+  }
+};
+ 
+export const getMovieUpdateAsync = async (
+  dispatch: Dispatch<MovieAction>
+) => {
+  try {
+    dispatch({type: MovieType.MOVIE_LOADING})
+    const response = await axios.get(
+      `${MOVIES_LIST}`
+    );
+    dispatch({
+      type: MovieType.MOVIE_SUCCESS,
+      payload: response.data.data,
+      totalAmount: response.data.totalAmount,
+    });
+  } catch (error: any) {
+    dispatch({
+      type: MovieType.MOVIE_ERROR,
+      payload: error,
+    });
+  }
+};
+
+export const postMovieAsync = async (
+  data: any, setShowSuccessModal: any,
+  dispatch: Dispatch<MovieAction>
+) => {
+  try {
+    dispatch({type: MovieType.MOVIE_LOADING})
+    const response = await axios.post(MOVIES_LIST, data);
+    setShowSuccessModal(true);
+    dispatch({
+      type: MovieType.ADD_MOVIE,
       payload: response.data,
     });
   } catch (error: any) {

@@ -19,22 +19,21 @@ export const DropdownContainer = styled.div`
   }
 `;
 
-
-export const DropdownBtn = styled.button({
-  display: "inline-block",
-  padding: "10px",
-  textTransform: "uppercase",
-  backgroundColor: "rgba(0, 0, 0, 0)",
-  border: "none",
-  cursor: "pointer",
-  color: "white",
-  "::after": {
-    content: "'\u25BC'",
-    color: "#F65261",
-    paddingLeft: "10px",
-    fontSize: "12px",
-  },
-});
+export const DropdownBtn = styled.button`
+  display: inline-block;
+  padding: 10px;
+  text-transform: uppercase;
+  background-color: ${(props) => props.theme.background.bgColorTransparent};
+  border: none;
+  cursor: pointer;
+  color: ${(props) => props.theme.colors.primaryColor};
+ &::after {
+    content: "\u25BC";
+    color: ${(props) => props.theme.colors.secondaryColor};
+    padding-left: 10px;
+    font-size: 12px;
+  }
+`;
 
 export const DropdownMenu = styled.ul`
   position: absolute;
@@ -47,7 +46,7 @@ export const DropdownMenu = styled.ul`
   background-color: ${(props) => props.theme.colors.secondaryColor};
   color: ${(props) => props.theme.colors.primaryColor};
   text-transform: uppercase;
-  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 2px ${(props) => props.theme.colors.boxShadowColor};
   border-radius: 4px;
   text-align: left;
   opacity: 0;
@@ -68,6 +67,6 @@ export const DropdownList = styled.li`
   color: ${(props) => props.theme.colors.primaryColor};
 
   &:hover {
-    background: #888;
+    background: ${(props) => props.theme.background.bgHoverDrop};
   }
 `;

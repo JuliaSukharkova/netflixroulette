@@ -10,6 +10,7 @@ export const InputSearch = styled.input`
   right: 4px;
   width: 219px;
   height: 30px;
+  padding-left: 5px;
   outline: none;
   border: none;
   transition: all 1s;
@@ -23,7 +24,7 @@ export const InputSearch = styled.input`
   &:focus {
     width: 300px;
     background-color: ${(props) => props.theme.background.bgColorInput};
-    color: #ffffff90;
+    color: ${(props) => props.theme.colors.inputFocusColor};
     opacity: 1;
     cursor: text;
   }
