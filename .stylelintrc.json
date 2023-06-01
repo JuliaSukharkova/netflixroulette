@@ -1,0 +1,21 @@
+{
+    "extends": "stylelint-config-standard-scss",
+    "rules": {
+      "color-named": "always-where-possible",
+      "selector-class-pattern": null,
+      "color-function-notation":"legacy",
+      "alpha-value-notation": "number",
+      "scss/dollar-variable-colon-newline-after": "always-multi-line",
+      "scss/dollar-variable-colon-space-after": "always-single-line",
+      "scss/dollar-variable-colon-space-before": "never",
+      "scss/dollar-variable-empty-line-before": [
+        "always",
+        {
+          "except": ["after-dollar-variable", "first-nested"],
+          "ignore": ["after-comment", "inside-single-line-block"]
+        }
+      ],
+      "scss/dollar-variable-no-missing-interpolation": null,
+      "scss/dollar-variable-pattern": null
+    }
+  }
