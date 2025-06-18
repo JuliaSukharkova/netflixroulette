@@ -1,15 +1,16 @@
-import type {Config} from 'jest';
-import {defaults} from 'jest-config';
+import type { Config } from "jest";
+import { defaults } from "jest-config";
 
 const config: Config = {
-  moduleFileExtensions: [...defaults.moduleFileExtensions, 'mts'],
+  moduleFileExtensions: [...defaults.moduleFileExtensions, "mts"],
   testEnvironment: "jsdom",
-  transform:{
-    "^.+\\.tsx?$" :  "ts-jest" 
+  transform: {
+    "^.+\\.tsx?$": "ts-jest",
   },
   setupFilesAfterEnv: [
-    "@testing-library/jest-dom/extend-expect"
-]
+    "@testing-library/jest-dom/extend-expect",
+    "<rootDir>/jest.setup.ts",
+  ],
 };
 
 export default config;

@@ -57,6 +57,7 @@ const config: Configuration = {
     }),
     new ESLintPlugin({
       extensions: ["js", "jsx", "ts", "tsx"],
+      overrideConfigFile: "./.eslintrc.js" 
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({

@@ -8,7 +8,7 @@ import HtmlWebpackPlugin from "html-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import ESLintPlugin from "eslint-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import CssMinimizerPlugin from "css-minimizer-webpack-plugin"
+import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 
 interface Configuration extends WebpackConfiguration {
   devServer?: WebpackDevServerConfiguration;
@@ -52,7 +52,7 @@ const config: Configuration = {
   },
   optimization: {
     minimize: true,
-    minimizer: [new CssMinimizerPlugin()]
+    minimizer: [new CssMinimizerPlugin()],
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
@@ -67,6 +67,7 @@ const config: Configuration = {
     }),
     new ESLintPlugin({
       extensions: ["js", "jsx", "ts", "tsx"],
+      overrideConfigFile: "./.eslintrc.js",
     }),
     new MiniCssExtractPlugin({
       filename: "[name].[contenthash].css",

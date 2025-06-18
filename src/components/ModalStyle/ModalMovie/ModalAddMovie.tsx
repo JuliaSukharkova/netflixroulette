@@ -37,7 +37,7 @@ export const ModalAddMovie = ({ setShowSuccessModal }: any) => {
       .typeError("Enter title")
       .min(1, "Min. 1 characters")
       .required("Title is required"),
-    release_date: Yup.date()
+    release_date: Yup.string()
       .typeError("Date is required")
       .required("Date is required"),
     poster_path: Yup.string()
