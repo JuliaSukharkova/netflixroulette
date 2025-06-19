@@ -41,21 +41,22 @@ export const Pagination = ({
         Назад
       </PageButton>
 
-      {getPages().map((page, index) =>
-        typeof page === "number" ? (
-          <PageButton
-            key={index}
-            $active={page === currentPage}
-            onClick={() => onPageChange(page)}
-          >
-            {page}
-          </PageButton>
-        ) : (
-          <PageButton key={index} disabled>
-            {page}
-          </PageButton>
-        )
-      )}
+      {total > 1 &&
+        getPages().map((page, index) =>
+          typeof page === "number" ? (
+            <PageButton
+              key={index}
+              $active={page === currentPage}
+              onClick={() => onPageChange(page)}
+            >
+              {page}
+            </PageButton>
+          ) : (
+            <PageButton key={index} disabled>
+              {page}
+            </PageButton>
+          )
+        )}
 
       <PageButton
         onClick={() => onPageChange(currentPage + 1)}

@@ -13,7 +13,8 @@ const envConfig = dotenv.config().parsed || {};
 
 const finalEnv = {
   ...envConfig,
-  REACT_APP_API_KEY: process.env.REACT_APP_API_KEY || envConfig.REACT_APP_API_KEY || "",
+  REACT_APP_API_KEY:
+    process.env.REACT_APP_API_KEY || envConfig.REACT_APP_API_KEY || "",
 };
 
 const envKeys = {
@@ -21,7 +22,6 @@ const envKeys = {
     prev[`process.env.${next}`] = JSON.stringify(finalEnv[next]);
     return prev;
   }, {} as Record<string, string>),
-  "process.env.TEST_VAR": JSON.stringify("HELLO_FROM_DEFINE_PLUGIN"),
 };
 
 const config: Configuration = {
@@ -64,14 +64,14 @@ const config: Configuration = {
     minimizer: [new CssMinimizerPlugin()],
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js'],
+    extensions: [".ts", ".tsx", ".js"],
     fallback: {
-      process: require.resolve('process/browser.js'), 
+      process: require.resolve("process/browser.js"),
     },
   },
   plugins: [
     new webpack.ProvidePlugin({
-      process: require.resolve('process/browser.js'), 
+      process: require.resolve("process/browser.js"),
     }),
     new DefinePlugin(envKeys),
     new CleanWebpackPlugin(),
