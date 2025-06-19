@@ -41068,8 +41068,9 @@ axios.default = axios;
 /* harmony default export */ const lib_axios = (axios);
 
 ;// ./src/api/api.ts
+/* provided dependency */ var api_process = __webpack_require__(606);
 
-var apiKey = "98bd6b7a-6688-4ee8-a75d-9141521969df";
+var apiKey = api_process.env.REACT_APP_API_KEY;
 var api = lib_axios.create({
   baseURL: "https://kinopoiskapiunofficial.tech/api",
   headers: {
