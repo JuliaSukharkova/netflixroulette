@@ -8,6 +8,7 @@ import { SearchPage } from "../pages/SearchPage";
 
 export const MainRoutes = () => {
   console.log("API KEY from env:", process.env.REACT_APP_API_KEY);
+  console.log(process.env.TEST_VAR);
   return (
     <HashRouter>
       <Routes>

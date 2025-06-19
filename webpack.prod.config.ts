@@ -9,16 +9,20 @@ import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import dotenv from "dotenv";
 import * as webpack from "webpack";
 
-const dotenvParsed = dotenv.config().parsed || {};
+const envConfig = dotenv.config().parsed || {};
 
-const envKeys = Object.keys(dotenvParsed).reduce((prev, next) => {
-  prev[`process.env.${next}`] = JSON.stringify(dotenvParsed[next]);
-  return prev;
-}, {} as Record<string, string>);
+const finalEnv = {
+  ...envConfig,
+  REACT_APP_API_KEY: process.env.REACT_APP_API_KEY || envConfig.REACT_APP_API_KEY || "",
+};
 
-envKeys["process.env.NODE_ENV"] = JSON.stringify(
-  process.env.NODE_ENV || "production"
-);
+const envKeys = {
+  ...Object.keys(finalEnv).reduce((prev, next) => {
+    prev[`process.env.${next}`] = JSON.stringify(finalEnv[next]);
+    return prev;
+  }, {} as Record<string, string>),
+  "process.env.TEST_VAR": JSON.stringify("HELLO_FROM_DEFINE_PLUGIN"),
+};
 
 const config: Configuration = {
   mode: "production",

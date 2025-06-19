@@ -17,13 +17,11 @@ interface Configuration extends WebpackConfiguration {
   devServer?: WebpackDevServerConfiguration;
 }
 
-const dotenvParsed = dotenv.config().parsed || {};
-
-const envKeys = Object.keys(dotenvParsed).reduce((prev, next) => {
-  prev[`process.env.${next}`] = JSON.stringify(dotenvParsed[next]);
+const envConfig = dotenv.config().parsed || {};
+const envKeys = Object.keys(envConfig).reduce((prev, next) => {
+  prev[`process.env.${next}`] = JSON.stringify(envConfig[next]);
   return prev;
-}, {} as Record<string, string>);
-
+}, {});
 envKeys["process.env.NODE_ENV"] = JSON.stringify(
   process.env.NODE_ENV || "development"
 );
@@ -75,14 +73,14 @@ const config: Configuration = {
     minimizer: [new CssMinimizerPlugin()],
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js'],
+    extensions: [".ts", ".tsx", ".js"],
     fallback: {
-      process: require.resolve('process/browser.js'), 
+      process: require.resolve("process/browser.js"),
     },
   },
   plugins: [
     new webpack.ProvidePlugin({
-      process: require.resolve('process/browser.js'),
+      process: require.resolve("process/browser.js"),
     }),
     new DefinePlugin(envKeys),
     new HtmlWebpackPlugin({ template: "src/index.html" }),
