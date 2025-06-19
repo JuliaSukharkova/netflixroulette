@@ -3,107 +3,90 @@ import styled from "styled-components";
 export const MovieSection = styled.section`
   display: flex;
   flex-wrap: wrap;
-  margin: 28px 0;
   gap: 34px;
+  margin: 28px 0;
+  justify-content: center;
 
   @media ${(props) => props.theme.media.portraitTablets} {
-    gap: 42px;
-    justify-content: center;
-  }
-  @media ${(props) => props.theme.media.smallDesktops} {
     gap: 24px;
   }
-  @media ${(props) => props.theme.media.medDesktops} {
-    gap: 28px;
-  }
 `;
 
-export const MovieContainer = styled.div`
+export const MovieCard = styled.div`
   display: flex;
   flex-direction: column;
-  font-weight: 500;
-  line-height: 17px;
-  width: 323px;
-  gap: 10px;
+  width: 300px;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: ${(props) => props.theme.background.card};
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
   cursor: pointer;
 
-  @media ${(props) => props.theme.media.portraitTablets} {
-    line-height: 14px;
-    width: 318px;
-  }
-  @media ${(props) => props.theme.media.smallDesktops} {
-    line-height: 14px;
-    width: 268px;
-  }
-  @media ${(props) => props.theme.media.medDesktops} {
-    width: 296px;
+  &:hover {
+    transform: translateY(-2px);
   }
 
-  a {
-    color: ${(props) => props.theme.colors.primaryColor};
+  @media ${(props) => props.theme.media.portraitTablets} {
+    width: 100%;
+    max-width: 300px;
   }
 `;
 
-export const MovieImg = styled.div`
-  height: 486px;
-  background: url("https://i.ibb.co/6XjvCPv/Bitmap.png");
+export const MovieImageWrapper = styled.div`
+  height: 420px;
+  background-color: #1c1c1c;
+  border-radius: 16px 16px 0 0;
+  overflow: hidden;
 
-  @media ${(props) => props.theme.media.portraitTablets} {
-    width: 318px;
-    height: 468px;
-  }
   @media ${(props) => props.theme.media.smallDesktops} {
-    height: 414px;
-    width: 268px;
-  }
-  @media ${(props) => props.theme.media.medDesktops} {
-    height: 414px;
-    width: 296px;
-  }
-  img {
-    height: 486px;
-
-    @media ${(props) => props.theme.media.portraitTablets} {
-      height: 468px;
-      width: 318px;
-    }
-    @media ${(props) => props.theme.media.smallDesktops} {
-      height: 414px;
-      width: 268px;
-    }
-    @media ${(props) => props.theme.media.medDesktops} {
-      height: 414px;
-      width: 296px;
-    }
+    height: 380px;
   }
 `;
 
-export const MovieTitle = styled.p`
+export const PosterImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
+export const MovieInfo = styled.div`
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+`;
+
+export const TitleYear = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+`;
+export const MovieYear = styled.span`
+  padding: 2px 6px;
+  font-size: 12px;
+  border: 1px solid ${(props) => props.theme.colors.borderColor};
+  border-radius: 4px;
+  opacity: 0.6;
+`;
+
+export const MovieTitle = styled.h3`
   font-size: ${(props) => props.theme.fontSize.fontSizeM};
-  line-height: 22px;
+  color: ${(props) => props.theme.colors.primaryColor};
+  font-weight: 600;
+  margin: 0;
+`;
+
+export const GenreList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 14px;
   opacity: 0.7;
 
-  @media ${(props) => props.theme.media.smallDesktops} {
-    font-size: 18px;
-    line-height: 18px;
-  }
-`;
-export const MovieYear = styled.p`
-  margin-left: auto;
-  padding: 4px 8px;
-  border-radius: 4px;
-  opacity: 0.5;
-  border: 1px solid ${(props) => props.theme.colors.borderColor};
-  text-align: center;
-`;
-
-export const MovieGenre = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  opacity: 0.5;
-
-  p:not(:last-child):after {
-    content: ", ";
+  span:not(:last-child)::after {
+    content: ",";
+    margin-right: 4px;
   }
 `;

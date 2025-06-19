@@ -3,17 +3,19 @@ import styled from "styled-components";
 export const MovieIdHeader = styled.header`
   display: flex;
   flex-direction: column;
-  height: 654px;
-  padding: 35px 60px;
-  background: ${props => props.theme.background.bgColor};
+  padding: 35px 35px;
+  background: ${(props) => props.theme.background.bgColor};
   gap: 30px;
+
   @media ${(props) => props.theme.media.medDesktops} {
-    height: 620px;
+    padding: 30px 50px;
   }
+
   @media ${(props) => props.theme.media.smallDesktops} {
-    height: 552px;
+    padding: 25px 40px;
   }
+
   @media ${(props) => props.theme.media.portraitTablets} {
-    height: 510px;
+    padding: 20px 20px;
   }
 `;

@@ -1,52 +1,85 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
+import { nanoid } from "nanoid";
+import { AppDispatch } from "../store/store";
 import { useTypedSelector } from "../hooks/useStore";
 import { getMoviesAsync, getMoviesbyFilter } from "../store/movieStore/api";
-import { MovieItem } from "../components/MovieForm/MovieItem";
-import { Dropdown } from "../components/Dropdown/Dropdown";
-import { NavigationMenu } from "../components/NavigationMenu/NavigationMenu";
+import { genresItems, sortItems } from "../costants/costants";
 import { Spinner } from "../components/Common/Spinner";
 import { ErrorMessage } from "../components/Error/ErrorMessage";
-import { sortItems, genresItems } from "../costants/costants";
+import { NavigationMenu } from "../components/NavigationMenu/NavigationMenu";
+import { Dropdown } from "../components/Dropdown/Dropdown";
+import { MovieItem } from "../components/MovieForm/MovieItem";
 import { MovieResults } from "../components/MovieForm/MovieResult";
-import { Line, Main, MenuNav, NavDropdown } from "../components/MovieForm/Main";
+import {
+  Main,
+  MenuNav,
+  NavDropdown,
+  Line,
+  ActiveLine,
+} from "../components/MovieForm/Main";
 import { MovieSection } from "../components/MovieForm/MovieStyle";
-
+import { Pagination } from "../components/Pagination/Pagination";
 
 export const MoviesPage = () => {
-  const dispatch = useDispatch();
-  const { movies, isLoading, error, amount } = useTypedSelector(
+  const dispatch = useDispatch<AppDispatch>();
+  const { movies, isLoading, error, total, pagesCount } = useTypedSelector(
     (state) => state.movies
   );
-  const [genreValue, setGenreValue] = useState(genresItems[0].value)
+  const [genreId, setGenreId] = useState<number>(0);
+  const [dropdownValue, setDropdownValue] = useState<string>("year");
+  const [lineProps, setLineProps] = useState({ left: 0, width: 0 });
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const [dropdownValue, setDropdownValue] = useState(sortItems[0].value);
-  
+  const navRef = useRef<HTMLUListElement>(null);
+
   useEffect(() => {
-    getMoviesAsync({ order: dropdownValue }, dispatch);
-  }, [dispatch, dropdownValue]);
+    if (navRef.current) {
+      const activeItem = navRef.current.querySelector(".active");
+      if (activeItem) {
+        const rect = (activeItem as HTMLElement).getBoundingClientRect();
+        const containerRect = navRef.current.getBoundingClientRect();
+
+        setLineProps({
+          left: rect.left - containerRect.left,
+          width: rect.width,
+        });
+      }
+    }
+  }, [genreId, dropdownValue]);
 
   useEffect(() => {
-    getMoviesbyFilter({filterGenres: genreValue}, dispatch);
-  }, [dispatch, genreValue]);
+    if (genreId === 0) {
+      dispatch(getMoviesAsync({ order: dropdownValue, page: currentPage }));
+    } else {
+      dispatch(
+        getMoviesbyFilter({
+          filterGenres: genreId,
+          order: dropdownValue,
+          page: currentPage,
+        })
+      );
+    }
+  }, [dispatch, genreId, dropdownValue, currentPage]);
 
-  if (isLoading) {
-    return <Spinner />
-  } else if (error) {
-    return (
-      <ErrorMessage/>
-    )
-  }
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [genreId, dropdownValue]);
+
+  if (isLoading) return <Spinner />;
+  if (error) return <ErrorMessage message={error.message} />;
+
   return (
     <Main>
       <MenuNav>
         <NavigationMenu
           items={genresItems}
-          genreValue={genreValue}
-          setGenreValue={setGenreValue}
-          />
+          selectedId={genreId}
+          onSelect={setGenreId}
+          navRef={navRef}
+        />
         <NavDropdown>
-          <p>sort by</p>
+          <p>сортировать</p>
           <Dropdown
             items={sortItems}
             dropdownValue={dropdownValue}
@@ -54,22 +87,29 @@ export const MoviesPage = () => {
           />
         </NavDropdown>
       </MenuNav>
-      <Line></Line>
-      <MovieResults><span>{`${amount}`}</span> movies found</MovieResults>
+      <Line>
+        <ActiveLine left={lineProps.left} width={lineProps.width} />
+      </Line>
+      <MovieResults>
+        <span>{total}</span> найдено фильмов
+      </MovieResults>
       <MovieSection>
-        {movies.map(({ id, poster_path, title, release_date, genres }) => (
+        {movies.map((movie) => (
           <MovieItem
-            key={id}
-            id={id}
-            title={title}
-            poster_path={poster_path}
-            genres={genres}
-            release_date={release_date}
+            key={nanoid()}
+            kinopoiskId={movie.kinopoiskId || movie.filmId}
+            nameRu={movie.nameRu}
+            posterUrlPreview={movie.posterUrlPreview}
+            genres={movie.genres}
+            year={movie.year}
           />
         ))}
       </MovieSection>
+      <Pagination
+        currentPage={currentPage}
+        total={pagesCount}
+        onPageChange={(page) => setCurrentPage(page)}
+      />
     </Main>
   );
- 
 };
- 

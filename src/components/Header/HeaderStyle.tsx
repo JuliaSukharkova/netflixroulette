@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const HeaderStyle = styled.header`
@@ -8,50 +9,51 @@ export const HeaderStyle = styled.header`
   flex-direction: column;
   gap: 35px;
   color: ${(props) => props.theme.colors.primaryColor};
-  background: url("https://i.ibb.co/6XjvCPv/Bitmap.png");
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: url("https://i.ibb.co/6XjvCPv/Bitmap.png") no-repeat center/cover;
   background-color: ${(props) => props.theme.background.bgColorOpacity};
+  padding: 0 20px;      
+  box-sizing: border-box;
 
   @media ${(props) => props.theme.media.portraitTablets} {
+    height: auto;
+    padding: 0 10px;
     margin-bottom: 8px;
   }
 `;
-export const TitleStyle = styled.h1`
-  font-weight: 300;
-  font-size: 40px;
-  margin-left: 278px;
-  @media ${(props) => props.theme.media.medDesktops} {
-    margin-left: 192px;
-  }
-  @media ${(props) => props.theme.media.smallDesktops} {
-    font-size: 38px;
-    margin-left: 138px;
-  }
+
+export const TopRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;   
+  box-sizing: border-box;
+  padding-top: 20px;
 
   @media ${(props) => props.theme.media.portraitTablets} {
-    font-size: 30px;
-    margin-left: 76px;
-    margin-top: 52px;
+    max-width: 100%;
   }
 `;
-export const Button = styled.button` 
-    margin-right: 60px;
-    margin-left: auto;
-    text-transform: uppercase;
-    font-weight: 600;
-    font-size: ${props=> props.theme.fontSize.fontSizeL};
-    line-height: 24px;
-    color: ${props=> props.theme.colors.secondaryColor};
-    background: ${props=> props.theme.background.bgColorBtn};
-    border-radius: 4px;
-    cursor: pointer;
-    padding: 12px 18px;
-    border-width: 0;
 
-    @media ${props=> props.theme.media.portraitTablets}{
-      margin-right: 20px;
-      font-size: ${props=> props.theme.fontSize.fontSizeM};
-      padding: 8px 14px;
-    }
-  `;
+export const LogoLink = styled(Link)`
+  display: block;
+  img {
+    max-width: 150px;
+    height: auto;
+    display: block;
+  }
+`;
+
+export const TitleAndSearch = styled.div`
+  width: 820px; 
+  margin-left: 60px; 
+  display: flex;
+  align-items: center;
+  height: 200px;
+
+  @media ${(props) => props.theme.media.portraitTablets} {
+    width: 420px;  
+    margin-left: 20px;
+  }
+`;
+

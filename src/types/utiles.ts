@@ -1,5 +1,5 @@
-export const getTimeFromMins = (runtime: any) => {
-  const hours = Math.trunc(runtime / 60);
-  const minutes = runtime % 60;
-  return hours + "h" + minutes + "min";
+export const getTimeFromMins = (filmLength: number) => {
+  const hours = Math.trunc(filmLength / 60);
+  const minutes = filmLength % 60;
+  return hours + " ч " + minutes + " минут ";
 };

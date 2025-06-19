@@ -2,71 +2,57 @@ import styled from "styled-components";
 
 export const DropdownContainer = styled.div`
   position: relative;
-  display: inline-block;
-  z-index: 2;
-  text-transform: uppercase;
-  width: 166px;
-  text-align: right;
-
-  @media ${(props) => props.theme.media.portraitTablets} {
-    width: 150px;
-  }
-  &:hover ul {
-    visibility: visible;
-    opacity: 1;
-    pointer-events: auto;
-    cursor: pointer;
-  }
+  width: 160px;
+  text-align: left;
+  user-select: none;
 `;
 
 export const DropdownBtn = styled.button`
-  display: inline-block;
-  padding: 10px;
-  text-transform: uppercase;
+  width: 100%;
+  padding: 10px 5px;
   background-color: ${(props) => props.theme.background.bgColorTransparent};
-  border: none;
-  cursor: pointer;
+  border: 1px solid ${(props) => props.theme.colors.borderColor};
   color: ${(props) => props.theme.colors.primaryColor};
- &::after {
-    content: "\u25BC";
-    color: ${(props) => props.theme.colors.secondaryColor};
-    padding-left: 10px;
+  text-transform: uppercase;
+  font-size: ${(props) => props.theme.fontSize.fontSizeXs};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 4px;
+
+  &::after {
+    content: '▾';
     font-size: 12px;
+    margin-left: 2px;
+    color: ${(props) => props.theme.colors.secondaryColor};
   }
 `;
 
-export const DropdownMenu = styled.ul`
+export const DropdownMenu = styled.ul<{ $isOpen: boolean }>`
+  display: ${({ $isOpen }) => ($isOpen ? "block" : "none")};
   position: absolute;
-  visibility: hidden;
-  top: 100%;
+  top: calc(100% + 4px);
   left: 0;
-  padding: 0;
-  margin: 0;
-  width: 156px;
-  background-color: ${(props) => props.theme.colors.secondaryColor};
+  width: 100%;
+  background-color: ${(props) => props.theme.background.bgColorBtn};
   color: ${(props) => props.theme.colors.primaryColor};
-  text-transform: uppercase;
-  box-shadow: 0 3px 2px ${(props) => props.theme.colors.boxShadowColor};
   border-radius: 4px;
-  text-align: left;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 150ms ease-in-out;
-
-  @media (max-width: $screen-md) {
-    width: 138px;
-  }
+  box-shadow: 0 4px 8px ${(props) => props.theme.colors.boxShadowColor};
+  opacity: ${(props) => (props.$isOpen ? 1 : 0)};
+  visibility: ${(props) => (props.$isOpen ? "visible" : "hidden")};
+  pointer-events: ${(props) => (props.$isOpen ? "auto" : "none")};
+  transition: all 0.2s ease-in-out;
+  z-index: 10;
 `;
 
 export const DropdownList = styled.li`
-  display: block;
-  padding: 10px;
-  text-decoration: none;
-  border-width: 0;
-  border-radius: 4px;
-  color: ${(props) => props.theme.colors.primaryColor};
+  padding: 10px 10px;
+  font-size: ${(props) => props.theme.fontSize.fontSizeXs};
+  cursor: pointer;
 
   &:hover {
-    background: ${(props) => props.theme.background.bgHoverDrop};
+    background-color: ${(props) => props.theme.background.bgHoverDrop};
+    border-radius: 4px;
   }
 `;

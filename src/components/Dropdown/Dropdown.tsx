@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { IDrop } from "../../types/dropdown";
 import {
   DropdownBtn,
   DropdownContainer,
@@ -7,23 +6,30 @@ import {
   DropdownMenu,
 } from "./DropdownStyle";
 
+interface IDrop {
+  items: { id: number; name: string; value: string }[];
+  dropdownValue: string;
+  setDropdownValue: (value: string) => void;
+}
+
 export const Dropdown = ({ items, dropdownValue, setDropdownValue }: IDrop) => {
   const [isOpen, setIsOpen] = useState(false);
-  const handleClick = (value) => {
+  const selectedItem = items.find(({ value }) => value === dropdownValue).name;
+
+  const toggleOpen = () => setIsOpen((prev) => !prev);
+
+  const handleSelect = (value: string) => {
+    console.log(value, "value");
     setDropdownValue(value);
     setIsOpen(false);
   };
+
   return (
     <DropdownContainer>
-      <DropdownBtn onClick={() => setIsOpen(!isOpen)}>
-        {items.find(({ value }) => value === dropdownValue).name}
-      </DropdownBtn>
-      <DropdownMenu>
+      <DropdownBtn onClick={toggleOpen}>{selectedItem}</DropdownBtn>
+      <DropdownMenu $isOpen={isOpen}>
         {items.map(({ id, name, value }) => (
-          <DropdownList
-            onClick={() =>{handleClick(value)}}
-            key={id}
-          >
+          <DropdownList key={id} onClick={() => handleSelect(value)}>
             {name}
           </DropdownList>
         ))}

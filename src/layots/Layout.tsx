@@ -6,7 +6,7 @@ import { Flex } from "../components/Common/Flex"
 
 export const Layout = () => {
   return (
-    <Flex direction="column">
+    <Flex direction="column" style={{minHeight: '100vh'}} >
       <Header />
       <main>
         <Outlet />

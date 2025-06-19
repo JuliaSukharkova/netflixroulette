@@ -9,10 +9,19 @@ import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import ESLintPlugin from "eslint-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
+import * as webpack from "webpack";
+import dotenv from "dotenv";
 
 interface Configuration extends WebpackConfiguration {
   devServer?: WebpackDevServerConfiguration;
 }
+
+const dotenvParsed = dotenv.config().parsed || {};
+
+const envKeys = Object.keys(dotenvParsed).reduce((prev, next) => {
+  prev[`process.env.${next}`] = JSON.stringify(dotenvParsed[next]);
+  return prev;
+}, {});
 
 const config: Configuration = {
   mode: "development",
@@ -72,6 +81,7 @@ const config: Configuration = {
     new MiniCssExtractPlugin({
       filename: "[name].[contenthash].css",
     }),
+    new webpack.DefinePlugin(envKeys),
   ],
   devtool: "inline-source-map",
   devServer: {

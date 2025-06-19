@@ -17,6 +17,21 @@ export const Search = () => {
     searchValue && navigate(`${MOVIE_SEARCH}/?value=${searchValue}`);
   };
 
+if (!searchValue || searchValue.trim() === "") {
+  return (
+    <SearchForm>
+      <InputElement
+        type="text"
+        onChange={onSearch}
+        value={searchValue}
+        data-testid="input"
+        placeholder="Чтобы Вы хотели посмотреть?"
+      />
+      <SearchBtn type="submit">Поиск</SearchBtn>
+    </SearchForm>
+  );
+}
+
   return (
     <SearchForm onSubmit={handleSubmit}>
       <InputElement
@@ -24,9 +39,9 @@ export const Search = () => {
         onChange={onSearch}
         value={searchValue}
         data-testid="input"
-        placeholder="What do you want to watch?"
+        placeholder="Чтобы Вы хотели посмотреть?"
       />
-      <SearchBtn type="submit">Search</SearchBtn>
+      <SearchBtn type="submit">Найти</SearchBtn>
     </SearchForm>
   );
 };

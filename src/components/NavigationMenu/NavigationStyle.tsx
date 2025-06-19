@@ -2,101 +2,59 @@ import styled from "styled-components";
 
 export const NavContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   cursor: pointer;
 `;
 
 export const NavList = styled.ul`
-  position: relative;
   display: flex;
-  align-items: center;
+  gap: 24px;
   padding: 0;
-  gap: 30px;
-  cursor: pointer;
+  margin: 0;
+  list-style: none;
 
   @media ${(props) => props.theme.media.portraitTablets} {
-    gap: 10px;
-  }
-  @media ${(props) => props.theme.media.smallDesktops} {
     gap: 12px;
   }
 `;
 
-export const NavItem = styled.li`
+export const NavWrapper = styled.div`
   display: flex;
+  flex: 1; 
+`;
+
+export const NavItem = styled.li`
   position: relative;
+  padding-bottom: 8px;
 
-  &.active {
-    &::after {
-      content: "";
-      background-color: ${(props) => props.theme.colors.tertiaryColor};
-      height: 4px;
-      display: block;
-      width: 36px;
-      position: absolute;
-      margin-top: 44px;
-      z-index: 1;
-
-      @media ${(props) => props.theme.media.portraitTablets}{
-        height: 2px;
-        width: 32px;
-        margin-top: 34px;
-      }
-    }
+  &.active a {
+    font-weight: 600;
   }
 
-  &#documentary {
-    ::after {
-      width: 134px;
-      @media ${(props) => props.theme.media.portraitTablets}{
-        width: 114px;
-      }
-      @media ${(props) => props.theme.media.smallDesktops} {
-        width: 122px;
-      }
-    }
-  }
-  &#horror {
-    ::after {
-      width: 82px;
-      @media ${(props) => props.theme.media.portraitTablets} {
-        width: 64px;
-      }
-      @media ${(props) => props.theme.media.smallDesktops} {
-        width: 70px;
-      }
-    }
-  }
-  &#comedy {
-    ::after {
-      width: 82px;
-      @media ${(props) => props.theme.media.portraitTablets} {
-        width: 64px;
-      }
-      @media ${(props) => props.theme.media.smallDesktops} {
-        width: 70px;
-      }
-    }
-  }
-  &#crime {
-    ::after {
-      width: 66px;
-      @media ${(props) => props.theme.media.portraitTablets}{
-        width: 48px;
-      }
-      @media ${(props) => props.theme.media.smallDesktops}  {
-        width: "52px";
-      }
+  a {
+    color: ${(props) => props.theme.colors.primaryColor};
+    font-size: ${(props) => props.theme.fontSize.fontSizeS};
+    text-transform: uppercase;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      color: ${(props) => props.theme.colors.secondaryColor};
     }
   }
 `;
 
 export const NavElement = styled.a`
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  transition: color 0.2s ease;
+
   color: ${(props) => props.theme.colors.primaryColor};
+  font-size: ${(props) => props.theme.fontSize.fontSizeS};
+  text-transform: uppercase;
 
   &:hover {
-    color: ${(props) => props.theme.colors.tertiaryColor};
-  }
-  @media ${(props) => props.theme.media.smallDesktops} {
-    font-size: 15px;
+    color: ${(props) => props.theme.colors.secondaryColor};
   }
 `;

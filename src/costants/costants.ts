@@ -1,18 +1,19 @@
 import { createGlobalStyle } from "styled-components";
 
 export const sortItems = [
-  { id: 1, name: "Release date", value: "release_date" },
-  { id: 2, name: "Rating", value: "vote_average" },
-  { id: 3, name: "Budget", value: "budget" },
+  { id: 1, name: "По дате", value: "year" },
+  { id: 2, name: "По рейтингу", value: "rating" },
+  { id: 3, name: "По просмотрам", value: "num_vote" },
 ];
 
 export const genresItems = [
-  { id: 1, name: "All", value: "" },
-  { id: 2, name: "Documentary", value: "documentary" },
-  { id: 3, name: "Horror", value: "horror" },
-  { id: 4, name: "Comedy", value: "comedy" },
-  { id: 5, name: "Crime", value: "crime" },
+  { id: 0, name: "Все" },
+  { id: 13, name: "Комедии" },
+  { id: 1, name: "Ужасы" },
+  { id: 22, name: "Документальные" },
+  { id: 2, name: "Драмы" },
 ];
+
 export const form = [
   { label: "Crime", htmlFor: "crime", name: "crime", value: "Crime" },
   {
@@ -78,7 +79,9 @@ export const theme = {
     checkBoxModalColor: "rgb(243 , 130, 129)",
     lineColor: "#424242",
     borderColor: "#979797",
-    inputFocusColor: "#ffffff90"
+    inputFocusColor: "#ffffff90",
+    hover:  "rgb(159, 159, 159)",
+    bright: "rgb(0, 0, 0)"
   },
   background: {
     bgColor: "#232323",
@@ -91,6 +94,7 @@ export const theme = {
     bgCheckBoxItem: "rgb(35, 35, 35)",
     bgModalContainer: "rgba(35, 35, 35, 0.9)",
     bgFooter: "#888888",
+    card: "#2e2e2e",
   },
   fontSize: {
     fontSizeL: "20px",

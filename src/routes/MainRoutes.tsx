@@ -14,9 +14,9 @@ export const MainRoutes = () => {
           <Route index element={<MoviesPage />} />
           <Route path={MOVIE_SEARCH} element={<SearchPage />} />
         </Route>
-        <Route path={`${MOVIE}/:id`} element={<LayoutMovieDetail/>}>
-        <Route index element={<MoviesPage />} />
-        </Route> 
+        <Route path={`${MOVIE}/:id`} element={<LayoutMovieDetail />}>
+          <Route index element={<MoviesPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

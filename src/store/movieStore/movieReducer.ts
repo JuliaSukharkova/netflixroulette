@@ -1,23 +1,28 @@
 import { MovieAction, MovieType } from "./actions";
 import { IMovie } from "../../types/movie";
 import { IMovieDetail } from "../../types/moviedetail";
-import { IAddMovie } from "../../types/addmovie";
+
+export interface ErrorPayload {
+  message: string;
+  code?: string;
+  status?: number;
+}
 
 interface MovieState {
   isLoading: boolean;
   movies: IMovie[];
-  addmovie: IAddMovie[],
   movieDetail: IMovieDetail | null;
-  error: null;
-  amount?: number;
+  error: ErrorPayload | null;
+  total: number;
+  pagesCount: number;
 }
 const initialValue: MovieState = {
   isLoading: false,
-  addmovie: [],
   movies: [],
   movieDetail: null,
   error: null,
-  amount: 0,
+  total: 0,
+  pagesCount: 0,
 };
 
 export const movieReducer = (
@@ -32,7 +37,8 @@ export const movieReducer = (
       return {
         ...state,
         movies: action.payload,
-        amount: action.totalAmount,
+        total: action.totalAmount,
+        pagesCount: action.pagesCount,
         isLoading: false,
       };
 
@@ -40,19 +46,17 @@ export const movieReducer = (
       return {
         ...state,
         movieDetail: action.payload,
-        isLoading: false
+        isLoading: false,
       };
-      case MovieType.ADD_MOVIE:
-      return {
-        ...state,
-        addmovie: action.payload, isLoading: false
-      }
 
     case MovieType.MOVIE_ERROR:
-      return { ...state, error: action.payload, isLoading: false };
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
 
     default:
       return state;
   }
 };
-

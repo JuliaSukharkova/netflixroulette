@@ -1,28 +1,27 @@
 import React from "react";
-import { IGenre } from "../../types/genres";
-import { NavContainer, NavElement, NavItem, NavList } from "./NavigationStyle";
+import { NavContainer, NavList, NavItem, NavElement } from "./NavigationStyle";
 
-export const NavigationMenu = ({
-  items,
-  genreValue,
-  setGenreValue,
-}: IGenre) => {
+type Props = {
+  items: { id: number; name: string }[];
+  selectedId: number;
+  onSelect: (id: number) => void;
+  navRef: React.RefObject<HTMLUListElement>;
+};
+
+export const NavigationMenu = ({ items, selectedId, onSelect, navRef }: Props) => {
   return (
     <NavContainer>
-      <NavList>
-        {items.map(({ id, name, value }) => (
+      <NavList ref={navRef}>
+        {items.map(({ id, name }) => (
           <NavItem
             key={id}
-            id={value}
-            data-testid={value}
-            className={`${value === genreValue ? "active" : ""}`}
+            className={id === selectedId ? "active" : ""}
           >
             <NavElement
-              id={value}
               href="#"
               onClick={(e) => {
-                setGenreValue(value);
                 e.preventDefault();
+                onSelect(id);
               }}
             >
               {name}

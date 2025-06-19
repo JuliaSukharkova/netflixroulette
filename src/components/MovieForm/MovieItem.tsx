@@ -3,35 +3,46 @@ import { Link } from "react-router-dom";
 import { MOVIE } from "../../costants/routes";
 import { IMovie } from "../../types/movie";
 import { Flex } from "../Common/Flex";
-import { MovieContainer, MovieGenre, MovieImg, MovieTitle, MovieYear } from "./MovieStyle";
+import {
+  MovieCard,
+  MovieImageWrapper,
+  PosterImage,
+  MovieInfo,
+  TitleYear,
+  MovieTitle,
+  MovieYear,
+  GenreList,
+} from "./MovieStyle";
 
 export const MovieItem = ({
-  id,
-  poster_path,
-  title,
-  release_date,
+  kinopoiskId,
+  nameRu,
+  posterUrlPreview,
   genres,
+  year,
 }: IMovie) => {
   return (
-    <MovieContainer key={id}>
-      <MovieImg>
-        <Link to={`${MOVIE}/${id}`}>
-          <img src={poster_path} alt="card" />
+    <MovieCard>
+      <MovieImageWrapper>
+        <Link to={`${MOVIE}/${kinopoiskId}`}>
+          <PosterImage src={posterUrlPreview} alt={`Постер фильма ${nameRu}`} />
         </Link>
-      </MovieImg>
-      <Flex direction="row" align="center">
-        <Link to={`${MOVIE}/${id}`}>
-          <MovieTitle>{title}</MovieTitle>
-        </Link>
-        <MovieYear>
-          {new Date(release_date).getFullYear()}
-        </MovieYear>
-      </Flex>
-      <MovieGenre>
-        {genres.slice(0, 2).map((genre, index) => (
-          <p key={index}>{genre.charAt(0).toUpperCase() + genre.slice(1)}</p>
-        ))}
-      </MovieGenre>
-    </MovieContainer>
+      </MovieImageWrapper>
+
+      <MovieInfo>
+        <TitleYear>
+          <MovieTitle>{nameRu}</MovieTitle>
+          <MovieYear>{year}</MovieYear>
+        </TitleYear>
+
+        <GenreList>
+          {genres.slice(0, 2).map((g) => (
+            <span key={g.genre}>
+              {g.genre.charAt(0).toUpperCase() + g.genre.slice(1)}
+            </span>
+          ))}
+        </GenreList>
+      </MovieInfo>
+    </MovieCard>
   );
 };

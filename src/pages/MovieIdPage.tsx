@@ -1,43 +1,48 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { MovieId } from "../components/MovieId/MovieId";
 import { useTypedSelector } from "../hooks/useStore";
 import { getMovieDetailAcync } from "../store/movieStore/api";
 import { Spinner } from "../components/Common/Spinner";
 import { ErrorMessage } from "../components/Error/ErrorMessage";
+import { AppDispatch } from "../store/store";
 
-export const MovieIdPage =()=>{
-    const {id} =useParams() as any;
-    const dispatch = useDispatch();
-    const { movieDetail, isLoading, error } = useTypedSelector(
+export const MovieIdPage = () => {
+  const { id } = useParams<{ id: string }>();
+  const dispatch = useDispatch<AppDispatch>();
+  const { movieDetail, isLoading, error } = useTypedSelector(
     (state) => state.movies
   );
 
-  useEffect(()=> {
-    getMovieDetailAcync({id}, dispatch)
-  },[id, dispatch])
+  useEffect(() => {
+    dispatch(getMovieDetailAcync({ id }));
+  }, [id, dispatch]);
 
   if (isLoading) {
     return <Spinner />;
-  } else if (error) {
-    return <ErrorMessage />;
   }
-    return (
-        <>
-        {movieDetail ? (
-                <MovieId key={movieDetail.id}
-                id={movieDetail.id}
-                title={movieDetail.title}
-                poster_path={movieDetail.poster_path}
-                release_date={movieDetail.release_date}
-                runtime={movieDetail.runtime}
-                vote_average={movieDetail.vote_average}
-                overview={movieDetail.overview}
-                genres={movieDetail.genres}
-                />
-        ): (
-            <div>No data yet :</div>)}
-        </>
-    )
-}
+
+  if (error) {
+    return <ErrorMessage message={error.message} />;
+  }
+
+  return (
+    <>
+      {movieDetail ? (
+        <MovieId
+          key={movieDetail.kinopoiskId}
+          kinopoiskId={movieDetail.kinopoiskId}
+          nameRu={movieDetail.nameRu}
+          posterUrl={movieDetail.posterUrl}
+          year={movieDetail.year}
+          filmLength={movieDetail?.filmLength}
+          ratingKinopoisk={movieDetail.ratingKinopoisk}
+          description={movieDetail.description}
+          genres={movieDetail.genres}  />
+      ) : (
+        <div>Ничего не найдено :(</div>
+      )}
+    </>
+  );
+};

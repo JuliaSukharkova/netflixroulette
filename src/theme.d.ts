@@ -11,7 +11,9 @@ declare module 'styled-components' {
       placeholderModalColor: string;
       checkBoxModalColor: string;
       borderColor: string;
+      hover: string;
       lineColor: string;
+      bright: string;
     };
     background: {
       bgColorTransparent: string;
@@ -24,6 +26,7 @@ declare module 'styled-components' {
       bgFooter: string;
       bgInputModal: string;
       bgCheckBoxItem: string;
+      card: string;
     };
     media: {
       portraitTablets: string;

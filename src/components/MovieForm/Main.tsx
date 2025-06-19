@@ -43,12 +43,26 @@ export const NavDropdown = styled.div`
   }
 `;
 
+export const ActiveLine = styled.div<{ left: number; width: number }>`
+  position: absolute;
+  bottom: 0;
+  height: 3px;
+  background-color: ${(props) => props.theme.colors.tertiaryColor};
+  transition: all 0.3s ease;
+  left: ${({ left }) => `${left}px`};
+  width: ${({ width }) => `${width}px`};
+  border-radius: 2px;
+`;
+
 export const Line = styled.div`
   position: relative;
   width: 100%;
-  border-top: 4px solid ${(props) => props.theme.colors.lineColor};
+  height: 4px;
+  margin-top: -4px;
+  border-radius: 2px;
+  background-color: ${(props) => props.theme.colors.lineColor};
 
   @media ${(props) => props.theme.media.portraitTablets} {
-    border-top: 2px solid ${(props) => props.theme.colors.lineColor};
+    height: 2px;
   }
 `;
