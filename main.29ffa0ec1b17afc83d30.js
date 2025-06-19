@@ -26495,37 +26495,9 @@ function BrowserRouter({
   children,
   window: window2
 }) {
-  let historyRef = react.useRef();
-  if (historyRef.current == null) {
-    historyRef.current = createBrowserHistory({ window: window2, v5Compat: true });
-  }
-  let history = historyRef.current;
-  let [state, setStateImpl] = react.useState({
-    action: history.action,
-    location: history.location
-  });
-  let setState = react.useCallback(
-    (newState) => {
-      react.startTransition(() => setStateImpl(newState));
-    },
-    [setStateImpl]
-  );
-  react.useLayoutEffect(() => history.listen(setState), [history, setState]);
-  return /* @__PURE__ */ react.createElement(
-    Router,
-    {
-      basename,
-      children,
-      location: state.location,
-      navigationType: state.action,
-      navigator: history
-    }
-  );
-}
-function HashRouter({ basename, children, window: window2 }) {
   let historyRef = React10.useRef();
   if (historyRef.current == null) {
-    historyRef.current = createHashHistory({ window: window2, v5Compat: true });
+    historyRef.current = createBrowserHistory({ window: window2, v5Compat: true });
   }
   let history = historyRef.current;
   let [state, setStateImpl] = React10.useState({
@@ -26540,6 +26512,34 @@ function HashRouter({ basename, children, window: window2 }) {
   );
   React10.useLayoutEffect(() => history.listen(setState), [history, setState]);
   return /* @__PURE__ */ React10.createElement(
+    Router,
+    {
+      basename,
+      children,
+      location: state.location,
+      navigationType: state.action,
+      navigator: history
+    }
+  );
+}
+function HashRouter({ basename, children, window: window2 }) {
+  let historyRef = react.useRef();
+  if (historyRef.current == null) {
+    historyRef.current = createHashHistory({ window: window2, v5Compat: true });
+  }
+  let history = historyRef.current;
+  let [state, setStateImpl] = react.useState({
+    action: history.action,
+    location: history.location
+  });
+  let setState = react.useCallback(
+    (newState) => {
+      react.startTransition(() => setStateImpl(newState));
+    },
+    [setStateImpl]
+  );
+  react.useLayoutEffect(() => history.listen(setState), [history, setState]);
+  return /* @__PURE__ */ react.createElement(
     Router,
     {
       basename,
@@ -42040,7 +42040,7 @@ var SearchPage = function SearchPage() {
 
 
 var MainRoutes = function MainRoutes() {
-  return /*#__PURE__*/react.createElement(BrowserRouter, null, /*#__PURE__*/react.createElement(Routes, null, /*#__PURE__*/react.createElement(Route, {
+  return /*#__PURE__*/react.createElement(HashRouter, null, /*#__PURE__*/react.createElement(Routes, null, /*#__PURE__*/react.createElement(Route, {
     path: HOME,
     element: /*#__PURE__*/react.createElement(Layout, null)
   }, /*#__PURE__*/react.createElement(Route, {
