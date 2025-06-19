@@ -41070,7 +41070,6 @@ axios.default = axios;
 ;// ./src/api/api.ts
 
 var apiKey = "98bd6b7a-6688-4ee8-a75d-9141521969df";
-console.log(apiKey, 'api');
 var api = lib_axios.create({
   baseURL: "https://kinopoiskapiunofficial.tech/api",
   headers: {
@@ -41791,7 +41790,7 @@ var Pagination = function Pagination(_ref) {
       return onPageChange(currentPage - 1);
     },
     disabled: currentPage === 1
-  }, "\u041D\u0430\u0437\u0430\u0434"), getPages().map(function (page, index) {
+  }, "\u041D\u0430\u0437\u0430\u0434"), total > 1 && getPages().map(function (page, index) {
     return typeof page === "number" ? /*#__PURE__*/react.createElement(PageButton, {
       key: index,
       $active: page === currentPage,
@@ -42041,8 +42040,6 @@ var SearchPage = function SearchPage() {
 
 
 var MainRoutes = function MainRoutes() {
-  console.log("API KEY from env:", "98bd6b7a-6688-4ee8-a75d-9141521969df");
-  console.log("HELLO_FROM_DEFINE_PLUGIN");
   return /*#__PURE__*/react.createElement(HashRouter, null, /*#__PURE__*/react.createElement(Routes, null, /*#__PURE__*/react.createElement(Route, {
     path: HOME,
     element: /*#__PURE__*/react.createElement(Layout, null)
