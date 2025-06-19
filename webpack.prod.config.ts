@@ -1,20 +1,24 @@
 import path from "path";
-import { Configuration } from "webpack";
+import { Configuration, DefinePlugin } from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import ESLintPlugin from "eslint-webpack-plugin";
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
-import * as webpack from "webpack";
 import dotenv from "dotenv";
+import * as webpack from "webpack";
 
 const dotenvParsed = dotenv.config().parsed || {};
 
 const envKeys = Object.keys(dotenvParsed).reduce((prev, next) => {
   prev[`process.env.${next}`] = JSON.stringify(dotenvParsed[next]);
   return prev;
-}, {});
+}, {} as Record<string, string>);
+
+envKeys["process.env.NODE_ENV"] = JSON.stringify(
+  process.env.NODE_ENV || "production"
+);
 
 const config: Configuration = {
   mode: "production",
@@ -26,6 +30,11 @@ const config: Configuration = {
   },
   module: {
     rules: [
+      {
+        test: /\.mjs$/,
+        type: "javascript/auto",
+        resolve: { fullySpecified: false },
+      },
       {
         test: /\.(ts|js)x?$/i,
         exclude: /node_modules/,
@@ -51,24 +60,24 @@ const config: Configuration = {
     minimizer: [new CssMinimizerPlugin()],
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: ['.ts', '.tsx', '.js'],
+    fallback: {
+      process: require.resolve('process/browser.js'), 
+    },
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: "src/index.html",
+    new webpack.ProvidePlugin({
+      process: require.resolve('process/browser.js'), 
     }),
-    new ForkTsCheckerWebpackPlugin({
-      async: false,
-    }),
+    new DefinePlugin(envKeys),
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({ template: "src/index.html" }),
+    new ForkTsCheckerWebpackPlugin({ async: false }),
     new ESLintPlugin({
       extensions: ["js", "jsx", "ts", "tsx"],
       overrideConfigFile: "./.eslintrc.js",
     }),
-    new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({
-      filename: "[name].[contenthash].css",
-    }),
-    new webpack.DefinePlugin(envKeys),
+    new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" }),
   ],
 };
 
