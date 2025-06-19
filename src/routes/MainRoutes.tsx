@@ -7,6 +7,7 @@ import { MoviesPage } from "../pages/MoviesPage";
 import { SearchPage } from "../pages/SearchPage";
 
 export const MainRoutes = () => {
+  console.log("API KEY from env:", process.env.REACT_APP_API_KEY);
   return (
     <HashRouter>
       <Routes>
