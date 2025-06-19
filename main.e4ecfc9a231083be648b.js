@@ -41068,8 +41068,9 @@ axios.default = axios;
 /* harmony default export */ const lib_axios = (axios);
 
 ;// ./src/api/api.ts
+/* provided dependency */ var api_process = __webpack_require__(606);
 
-var apiKey = "98bd6b7a-6688-4ee8-a75d-9141521969df";
+var apiKey = api_process.env.REACT_APP_API_KEY;
 console.log(apiKey, 'api');
 var api = lib_axios.create({
   baseURL: "https://kinopoiskapiunofficial.tech/api",
@@ -42033,6 +42034,7 @@ var SearchPage = function SearchPage() {
   }));
 };
 ;// ./src/routes/MainRoutes.tsx
+/* provided dependency */ var MainRoutes_process = __webpack_require__(606);
 
 
 
@@ -42041,7 +42043,7 @@ var SearchPage = function SearchPage() {
 
 
 var MainRoutes = function MainRoutes() {
-  console.log("API KEY from env:", "98bd6b7a-6688-4ee8-a75d-9141521969df");
+  console.log("API KEY from env:", MainRoutes_process.env.REACT_APP_API_KEY);
   return /*#__PURE__*/react.createElement(HashRouter, null, /*#__PURE__*/react.createElement(Routes, null, /*#__PURE__*/react.createElement(Route, {
     path: HOME,
     element: /*#__PURE__*/react.createElement(Layout, null)
